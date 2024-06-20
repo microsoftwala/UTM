@@ -1,0 +1,349 @@
+.container {
+      max-width: 1366px;
+      margin:auto;
+      padding: 5px 20px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    
+.header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+}
+
+.image{
+      height: 160px;
+      /* Extra */
+      width: 75%;
+}
+    
+.logo {
+      display: flex;
+      align-items: center;
+      font-size: 75px;
+      font-weight: bold;
+      color: #000000;
+}
+      
+.dots2 {
+      height:40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #000000;
+      margin-top: 5px;
+      margin-right: -11px;
+}
+
+.dots {
+      height:40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: #000000;
+      margin-top: 5px;
+      margin-left: -0.5px;
+}
+
+
+
+.dots1{
+      height:60px;
+      display:flex;
+      margin-left: 20px;
+      align-items: end;
+}
+    
+.content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      padding: 20px;
+      margin: auto;
+}
+    
+.h1 {
+      font-size: 46px;
+      font-weight: bold;
+      color: #000000;
+}
+    
+.form-group {
+      display: flex;
+      margin-bottom: 20px;
+      width: 100%;
+}
+    
+label {
+      font-weight: semi-bold;
+      width:50%;
+      display: flex;
+      text-align: center;
+      align-items: center;
+}
+
+@media(min-width: 524px){
+      label{
+            display: flex;
+            justify-content: end;
+            padding-right: 8%;
+      }
+}
+    
+select {
+      padding: 10px;
+      border: 2px solid #00126B;
+      border-radius: 4px;
+      font-size: 15px;
+      width: 35%;
+      display: flex;
+      justify-content: center;
+}
+
+select:hover{
+      background-color: #f1f3fa;
+}
+
+button {
+      background-color: #3860B2;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 260px;
+}
+    
+button:hover {
+      background-color: #286090;
+}
+
+
+@media (max-width: 1024px){
+      .image{
+            height: 144px;
+      }
+      .logo {
+            display: flex;
+            align-items: center;
+            font-size: 65px;
+            font-weight: bold;
+            color: #333;
+      }
+      .dots {
+            margin-top: 5px;
+            height:35px;
+            width: 35px;
+      }
+
+      .dots1{
+            height:55px;
+            display:flex;
+            margin-left: 20px;
+            align-items: end;
+      }
+      .h1 {
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+      }
+}
+    
+@media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+      }
+
+      .image{
+            height: 130px;
+            /* Extra */
+            width:85%;
+      }
+    
+      .logo {
+            display: flex;
+            align-items: center;
+            font-size: 55px;
+            font-weight: bold;
+            color: #333;
+      }
+    
+      .dots {
+        margin-top: 5px;
+        height:30px;
+        width: 30px;
+      }
+
+      .dots1{
+            height:45px;
+            display:flex;
+            margin-left: 18px;
+            align-items: end;
+      }
+
+      .h1{ 
+            font-size: 35px;
+            font-weight: bold;
+            color: #333;            
+      }
+}
+
+   
+@media (max-width: 524px) {
+      .header {
+        flex-direction: column;
+      }
+      .image{
+            height: 115px;
+            /* Extra */
+            width:88%;
+      }
+      .logo {
+            display: flex;
+            align-items: center;
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+      }
+    
+      .dots {
+        margin-top: 5px;
+        height:25px;
+        width: 25px;
+      }
+
+      .dots1{
+            height:35px;
+            display:flex;
+            margin-left: 16px;
+            align-items: end;
+      }
+
+      .dots2{
+            height:25px;
+            width: 25px;
+            border-radius: 50%;
+            background-color: #000000;
+            margin-top: 5px;
+            margin-right: -8px;
+      }
+
+      .h1{ 
+            font-size: 30px;
+            font-weight: bold;
+            color: #333;            
+      }
+      .form-group {
+            flex-direction: column;
+            display: flex;
+            margin-bottom: 20px;
+            width: 100%;
+      }
+      label {
+            font-weight: semi-bold;
+            width:100%;
+            display: flex;
+            justify-content:center;
+            text-align: center;
+            align-items: center;
+      }
+          
+      select {
+            margin: auto;
+            margin-top: 16px;
+            font-size: 15px;
+            width: 75%;
+            display: flex;
+            justify-content: center;
+      }
+      button {
+            width: 200px;
+      }
+}
+
+
+
+ 
+@media (max-width: 396px) {
+      .image2{
+            height:70px;
+            /* Extra */
+            width:100%;
+      }
+      .header {
+        flex-direction: column;
+      }
+
+      .image{
+            height: 100px;
+      }
+    
+      .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+      }
+    
+      .dots {
+        margin-top: 5px;
+        height:20px;
+        width: 20px;
+      }
+
+      .dots1{
+            height:25px;
+            display:flex;
+            margin-left: 14px;
+            align-items: end;
+      }
+
+      .dots2{
+            height:20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: #000000;
+            margin-top: 5px;
+            margin-right: -6px;
+      }
+
+      .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            width: 100%;
+      }
+      .h1{ 
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;            
+      }
+      label {
+            font-weight: semi-bold;
+            width:100%;
+            display: flex;
+            justify-content:center;
+            text-align: center;
+            align-items: center;
+      }
+          
+      select {
+            margin: auto;
+            margin-top: 16px;
+            font-size: 15px;
+            width: 85%;
+            display: flex;
+            justify-content: center;
+      }
+      button {
+            width: 175px;
+      }
+}

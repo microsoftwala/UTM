@@ -1,0 +1,226 @@
+.container1 {
+      max-width: 1366px;
+      margin:6px auto 30px;
+      padding: 2% 5%;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+input{
+  border:2px solid rgb(75, 73, 207);
+  padding: 10px;
+  border-radius: 5px;
+ 
+}
+
+.input{
+  display: flex;
+}
+input:hover{
+  background-color: #c8d6eb;
+}
+
+.image1{
+      margin-top: 8px;
+      height:53px;
+      /* Extra */
+      width: 25%;
+}
+
+.image2{
+    height:105px;
+    /* Extra */
+    width: 80%;
+}
+
+       
+.logo1 {
+      display: flex;
+      align-items: center;
+      font-size: 25px;
+      font-weight:calc(650);
+      color: #000000;
+}
+      
+.dot2 {
+      height:17px;
+      width: 17px;
+      border-radius: 50%;
+      background-color: #000000;
+      margin-top: 5px;
+      margin-right: -5px;
+}
+
+.dot {
+      height:17px;
+      width: 17px;
+      border-radius: 50%;
+      background-color: #000000;
+      margin-top: 5px;
+      margin-left: -0.5px;
+}
+
+
+
+.dot1{
+      height:18px;
+      display:flex;
+      margin-left: 10px;
+      align-items: end;
+}
+    
+    
+    h1 {
+      font-size: 37px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #070707;
+      margin-bottom: 20px;
+      margin-bottom: 5%;
+    }
+
+    .title{
+      font-size:24px;
+    }
+    
+    .buttons-grid {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 10px;
+    }
+
+    .buttons-grid1 {
+            margin-top: 5%;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+      }
+    .buttons-grid2 {
+      margin-top: 5%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .buttons-grid3 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center; 
+      gap: 10%; 
+    }
+
+    .buttons-grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-content: center; 
+      gap: 10%; 
+    }
+
+    .buttons-grid5{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center; 
+      gap: 10%; 
+    }
+    
+    
+    
+    .campaign-button {
+      background-color: white;
+      border: none;
+      padding: 10px 5px;
+      width: 145px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      border:1.5px solid rgb(75, 73, 207);
+      color:#337ab7;
+      font-weight: 500;
+    }
+    
+    .campaign-button:hover {
+      background-color: rgb(38, 79, 160);
+      color: #fff;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 5px 0;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+}
+    
+    /* Responsive design */
+    
+    @media (max-width: 600px) {
+     .container {
+        padding: 10px;
+      }
+     .buttons-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+     .campaign-button {
+        padding: 10px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+     .container {
+        padding: 5px;
+      }
+     .campaign-button {
+        font-size: 14px;
+      }
+      h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: 600;
+      }
+    }
+
+    @media (max-width: 550px){
+      h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: 700;
+      }
+      .subtitle {
+            font-size: 12px;
+            color: #070707;
+            margin-bottom: 20px;
+            margin-bottom: 5%;
+          }
+          .title{
+            font-size:20px;
+          }
+    }
+
+    @media (max-width:524px){
+      .input{
+        justify-content: center;
+      }
+    }
+
+  
+    .buttons{
+      width: 170px;
+    }
+
+    @media(max-width:1024px){
+      .buttons{
+        width:140px;
+      }
+    }
+
+    @media(max-width:924px){
+      .buttons{
+        width:120px;
+      }
+    }
