@@ -18,12 +18,18 @@ const formatDate = (date) => {
   return `${day}${month}${year}`;
 };
 
+const formatString = (input) => {
+  return input.trim().replace(/\s+/g, " ").replace(/\s/g, "_");
+};
+
 const Cname = () => {
   const {
     businessUnit,
     selectedCampaign,
+    setSelectedCampaign,
     selectedPlateform,
     checkfordisplay,
+    setContent,
     region,
     businessline,
     specie,
@@ -42,10 +48,19 @@ const Cname = () => {
     setCampaignname,
   } = useGlobalState();
 
-  if (other === "Other") {
-    console.log("Other kay pass");
-    setOther("");
-  }
+  if (other === "Other") setOther("");
+  if (content === "Other") setContent("");
+  if (Category === "Other") setCategory("");
+
+  if (selectedCampaign === "Search" || selectedCampaign === "Video")
+    setSelectedCampaign("serach_ad");
+  else if (selectedCampaign === "Paid Social") setSelectedCampaign("social_ad");
+  else if (selectedCampaign === "Organic Social")
+    setSelectedCampaign("social_post");
+  else if (selectedCampaign === "Display") setSelectedCampaign("display");
+  else if (selectedCampaign === "Email") setSelectedCampaign("email");
+  else if (selectedCampaign === "Print") setSelectedCampaign("print");
+  else setSelectedCampaign("website");
 
   const [check, setCheck] = useState(true);
 
@@ -59,6 +74,9 @@ const Cname = () => {
   const [utmurl, setUtmurl] = useState("");
 
   const handleGenrate = () => {
+    const campaignname1 = formatString(campaignname);
+    const description1 = formatString(description);
+    const other1 = formatString(other);
     if (businessUnit === "Human Nutrition") {
       setUtmurl(
         url +
@@ -67,7 +85,7 @@ const Cname = () => {
           "&utm_medium=" +
           selectedCampaign +
           "&utm_campaign=" +
-          campaignname +
+          campaignname1 +
           "_" +
           Category +
           "_&utm_term=" +
@@ -76,11 +94,11 @@ const Cname = () => {
           region +
           "&utm_content=" +
           content +
-          other +
+          other1 +
           "_" +
           formattedDate +
           "&utm_vechile=" +
-          description
+          description1
       );
     } else if (businessUnit === "Personal Care") {
       setUtmurl(
@@ -90,7 +108,7 @@ const Cname = () => {
           "&utm_medium=" +
           selectedCampaign +
           "&utm_campaign=" +
-          campaignname +
+          campaignname1 +
           "_" +
           Category +
           "_&utm_term=" +
@@ -101,7 +119,7 @@ const Cname = () => {
           region +
           "&utm_content=" +
           content +
-          other +
+          other1 +
           "_" +
           formattedDate
       );
@@ -113,7 +131,7 @@ const Cname = () => {
           "&utm_medium=" +
           selectedCampaign +
           "&utm_campaign=" +
-          campaignname +
+          campaignname1 +
           "_" +
           Category +
           "_&utm_term=" +
@@ -126,7 +144,7 @@ const Cname = () => {
           region +
           "&utm_content=" +
           content +
-          other +
+          other1 +
           "_" +
           formattedDate
       );
@@ -138,7 +156,7 @@ const Cname = () => {
           "&utm_medium=" +
           selectedCampaign +
           "&utm_campaign=" +
-          campaignname +
+          campaignname1 +
           "_" +
           leadgen +
           "_" +
@@ -150,11 +168,11 @@ const Cname = () => {
           region +
           "&utm_content=" +
           content +
-          other +
+          other1 +
           "_" +
           formattedDate +
           "&utm_vechile=" +
-          description
+          description1
       );
     }
     setCheck(false);
@@ -258,10 +276,11 @@ const Cname = () => {
           <div className="md:w-1/3 w-full md:mt-0 mt-6 mr-6">
             <p className="font-bold text-xl w-full">Select Category</p>
             <div className="w-full pt-2"></div>
-            {Types_for_Campaign[businessUnit][0] !== "Not Applicable" ? (
+            {Types_for_Campaign[businessUnit][0] !== "Not Applicable" &&
+            Types_for_Campaign[businessUnit][0] !== "Other" ? (
               <select
-                id="cateogory"
-                value={cateogory}
+                id="category"
+                value={Category}
                 onChange={handleCateogoryChange}
                 className="w-full"
               >
@@ -273,7 +292,7 @@ const Cname = () => {
               </select>
             ) : (
               <select
-                id="cateogory"
+                id="category"
                 value={Category}
                 onChange={handleCateogoryChange}
                 className="w-full bg-gray-400 hover:bg-gray-400"
@@ -356,7 +375,7 @@ const Cname = () => {
           <div className="relative md:w-4/5 w-full">
             <textarea
               value={utmurl}
-              className="w-full pt-2 pb-2 h-24 bg-gray-300 border-gray-600 hover:bg-gray-300 pl-2 pr-1 text-gray-500"
+              className="w-full pt-2 pb-2 min-h-28 bg-gray-300 border-gray-600 hover:bg-gray-300 pl-2 pr-1 text-gray-500"
               disabled
             />
           </div>

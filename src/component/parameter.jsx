@@ -8,6 +8,7 @@ import data from "./parameterdata";
 import { motion } from "framer-motion";
 import animation from "./animation";
 
+
 const Parameter = () => {
   const {
     businessUnit,
