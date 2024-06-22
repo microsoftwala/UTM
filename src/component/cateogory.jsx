@@ -7,11 +7,19 @@ import Header from "./header";
 import data from "./categorydata";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
 
 const Cateogory = () => {
-  const { businessUnit, specie, setSpecie, cateogory, setCateogory } =
-    useGlobalState();
+  const {
+    businessUnit,
+    specie,
+    setSpecie,
+    cateogory,
+    setCateogory,
+    setLastroute,
+  } = useGlobalState();
 
+  setLastroute("/cateogory");
   const handleClick = (campaign) => {
     if (
       specie === "" &&
@@ -84,7 +92,7 @@ const Cateogory = () => {
                 id="businessUnit"
                 value={specie}
                 onChange={handleSpecieChange}
-                className="w-3/4 bg-gray-400 hover:bg-gray-400"
+                className="w-3/4 bg-gray-400 hover:bg-gray-400 border-gray-400"
                 disabled="true"
               >
                 {Types_for_Species[businessUnit].map((val, key) => (
@@ -125,7 +133,7 @@ const Cateogory = () => {
                 id="cateogory"
                 value={cateogory}
                 onChange={handleCateogoryChange}
-                className="w-3/4 bg-gray-400 hover:bg-gray-400"
+                className="w-3/4 bg-gray-400 hover:bg-gray-400 border-gray-400"
                 disabled="true"
               >
                 {Types_for_Category[businessUnit].map((val, key) => (
@@ -147,11 +155,20 @@ const Cateogory = () => {
           />
         </div>
         <button
-          className=" text-white font-semibold rounded"
+          className=" text-white font-semibold rounded button"
           onClick={() => handleClick()}
         >
           Continue
         </button>
+        <div className="absolute right-0 md:text-4xl text-3xl">
+          <button
+            onClick={() => {
+              navigate("/preview");
+            }}
+          >
+            <VscPreview />
+          </button>
+        </div>
       </div>
     </motion.div>
   );

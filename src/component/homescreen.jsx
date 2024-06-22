@@ -6,13 +6,16 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
 
 function Homescreen() {
   const navigate = useNavigate();
-  const { businessUnit, setBusinessUnit, setCheckfordisplay } =
+  const { businessUnit, setBusinessUnit, setCheckfordisplay, setLastroute } =
     useGlobalState();
+  setLastroute("/");
   const [open, setOpen] = useState(false);
-  const { fadeTransition, fadeVariants } = animation;
+  const { fadeTransition, fadeVariants, popupTransition, popupVariants } =
+    animation;
 
   const handleBusinessUnitChange = (event) => {
     setBusinessUnit(event.target.value);
@@ -38,30 +41,37 @@ function Homescreen() {
       transition={fadeTransition}
     >
       <div className="header">
-        <img src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg" alt="dsm-firmenich" className="image" />
-        {/* <div className="logo">
-          <span>dsm-firmenich</span>
-          <div className="dots1">
-            <span className="dots dots2"></span>
-            <span className="dots"></span>
-            <span className="dots"></span>
-          </div>
-        </div> */}
+        <img
+          src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
+          alt="dsm-firmenich"
+          className="image"
+        />
       </div>
 
       <Popup open={open} onClose={() => setOpen(false)} position="top center">
-        <div className="popup-content">
-          <p className="">Please select a business unit to proceed.</p>
-          <div
-            className="flex justify-center cursor-pointer bg-blue-400 font-bold text-teal-50 p-2"
-            onClick={() => setOpen(false)}
-          >
-            Ok
+        <motion.div
+          className="popup-content"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={popupVariants}
+          transition={popupTransition}
+        >
+          <p className="font-semibold text-red-600 text-xl text-center font-sans">
+            Please select a business unit to proceed.
+          </p>
+          <div className="flex justify-center  font-bold text-teal-50">
+            <div
+              className="w-1/3 cursor-pointer bg-blue-800 flex justify-center p-2 border-2 hover:bg-blue-900"
+              onClick={() => setOpen(false)}
+            >
+              Ok
+            </div>
           </div>
-        </div>
+        </motion.div>
       </Popup>
 
-      <div className="content">
+      <div className="content w-full">
         <h1 className="h1 flex justify-center items-center text-center pt-2">
           UTM Parameters Automation Utility
         </h1>
@@ -82,10 +92,20 @@ function Homescreen() {
             <option value="Biomedical">Biomedical</option>
           </select>
         </div>
-        <div className="pt-10">
-          <button onClick={handleGetStarted} className="font-semibold">
+        <div className="pt-10 relative w-full flex justify-center">
+          <button onClick={handleGetStarted} className="font-semibold button">
             Get Started
           </button>
+
+          <div className="absolute right-4 md:text-3xl text-2xl bottom-1">
+            <button
+              onClick={() => {
+                navigate("/preview");
+              }}
+            >
+              <VscPreview />
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>

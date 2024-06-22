@@ -43,15 +43,15 @@ const Animal_Health_Nutrition1 = [
 const Personal_Care1 = ["Other"];
 
 const TTH_ISOL1 = ["Other"];
+const Select1 = ["Other"];
 
 const Types_for_Campaign = {
   "Human Nutrition": Human_Nutrition1,
   "TTH ISOL": TTH_ISOL1,
   "Animal Health & Nutrition": Animal_Health_Nutrition1,
   "Personal Care": Personal_Care1,
-  "Select a Business Unit": Select,
-  Biomedical: Select,
+  "Select a Business Unit": Select1,
+  Biomedical: Select1,
 };
 
-
-export default { Types_for_Campaign,Types_for_Leadgen };
+export default { Types_for_Campaign, Types_for_Leadgen };

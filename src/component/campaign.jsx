@@ -7,10 +7,12 @@ import Header from "./header";
 import campaignTypesData from "./campaignData";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
 
 const Campaign = () => {
-  const { businessUnit, setSelectedCampaign, setFirstarray } = useGlobalState();
-
+  const { businessUnit, setSelectedCampaign, setFirstarray, setLastroute } =
+    useGlobalState();
+  setLastroute("/campaign");
   const [windowwidth, setWindowwidth] = useState(window.innerWidth);
 
   const handleClick = (campaign) => {
@@ -120,11 +122,20 @@ const Campaign = () => {
           </>
         )}
       </div>
-      <div className="">
+      <div className="relative w-full">
         <IoArrowBackCircleOutline
           className="md:text-6xl text-5xl text-blue-700 cursor-pointer font-semibold"
           onClick={() => goBack()}
         />
+        <div className="absolute right-1 md:text-4xl text-3xl bottom-1">
+          <button
+            onClick={() => {
+              navigate("/preview");
+            }}
+          >
+            <VscPreview />
+          </button>
+        </div>
       </div>
     </motion.div>
   );

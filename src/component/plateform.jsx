@@ -7,6 +7,7 @@ import Header from "./header";
 import data from "./plateformData";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
 
 const Plateform = () => {
   const navigate = useNavigate();
@@ -18,7 +19,10 @@ const Plateform = () => {
     firstarray,
     checkfordisplay,
     setCheckfordisplay,
+    setLastroute
   } = useGlobalState();
+
+  setLastroute("/plateform")
 
   const [windowwidth, setWindowwidth] = useState(window.innerWidth);
 
@@ -236,11 +240,20 @@ const Plateform = () => {
             )}
         </div>
       </div>
-      <div className="mt-36">
+      <div className="mt-36 w-full relative">
         <IoArrowBackCircleOutline
           className="md:text-6xl text-5xl text-blue-700 cursor-pointer font-semibold"
           onClick={() => goBack()}
         />
+        <div className="absolute right-1 md:text-4xl text-3xl bottom-2">
+          <button
+            onClick={() => {
+              navigate("/preview");
+            }}
+          >
+            <VscPreview />
+          </button>
+        </div>
       </div>
     </motion.div>
   );

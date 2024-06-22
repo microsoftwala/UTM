@@ -19,7 +19,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [Category, setCategory] = useState("");
   const [url, setUrl] = useState("");
   const [campaignname, setCampaignname] = useState("");
-
+  const [lastroute, setLastroute] = useState("/");
   return (
     <GlobalStateContext.Provider
       value={{
@@ -55,6 +55,8 @@ export const GlobalStateProvider = ({ children }) => {
         setUrl,
         campaignname,
         setCampaignname,
+        lastroute,
+        setLastroute,
       }}
     >
       {children}

@@ -7,10 +7,13 @@ import Header from "./header";
 import data from "./parameterdata";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
+
 
 
 const Parameter = () => {
   const {
+    setLastroute,
     businessUnit,
     content,
     setContent,
@@ -19,7 +22,7 @@ const Parameter = () => {
     other,
     setOther,
   } = useGlobalState();
-
+  setLastroute("/parameter")
   const clearInput = () => {
     setDescription("");
   };
@@ -62,7 +65,7 @@ const Parameter = () => {
     if (Types_for_Content[businessUnit].length === 1) {
       setContent(Types_for_Content[businessUnit][0]);
     }
-  }, [businessUnit]);
+  }, );
 
   const classname = content === "Other" ? "md:w-1/2 w-full" : "w-full";
   return (
@@ -107,7 +110,7 @@ const Parameter = () => {
                   id="businessUnit"
                   value={content}
                   onChange={handleContentChange}
-                  className="w-3/4 bg-gray-400 hover:bg-gray-400"
+                  className="w-3/4 bg-gray-400 hover:bg-gray-400 border-gray-400"
                   disabled="true"
                 >
                   {Types_for_Content[businessUnit].map((val, key) => (
@@ -187,11 +190,20 @@ const Parameter = () => {
           />
         </div>
         <button
-          className=" text-white font-semibold rounded"
+          className=" text-white font-semibold rounded button"
           onClick={() => handleClick()}
         >
           Continue
         </button>
+        <div className="absolute right-1 md:text-4xl text-3xl">
+            <button
+              onClick={() => {
+                navigate("/preview");
+              }}
+            >
+              <VscPreview />
+            </button>
+          </div>
       </div>
     </motion.div>
   );

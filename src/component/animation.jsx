@@ -11,7 +11,32 @@ const fadeVariants = {
 };
 
 const fadeTransition = {
-  duration: 1,
+  duration: 0.6,
 };
 
-export default { fadeTransition, fadeVariants };
+const popupVariants = {
+  hidden: {
+    opacity: 0,
+    x: "100%",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: {
+    opacity: 0,
+    x: "100%",
+  },
+};
+
+const popupTransition = {
+  type: "spring",
+  duration: 0.9,
+};
+
+export default {
+  fadeTransition,
+  fadeVariants,
+  popupTransition,
+  popupVariants,
+};

@@ -9,6 +9,8 @@ import Header from "./header";
 import data from "./cnamedata";
 import { motion } from "framer-motion";
 import animation from "./animation";
+import { VscPreview } from "react-icons/vsc";
+
 
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
@@ -25,6 +27,7 @@ const formatString = (input) => {
 const Cname = () => {
   const {
     businessUnit,
+    setLastroute,
     selectedCampaign,
     setSelectedCampaign,
     selectedPlateform,
@@ -47,7 +50,7 @@ const Cname = () => {
     campaignname,
     setCampaignname,
   } = useGlobalState();
-
+  setLastroute("/cname")
   if (other === "Other") setOther("");
   if (content === "Other") setContent("");
   if (Category === "Other") setCategory("");
@@ -209,14 +212,18 @@ const Cname = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard
-      .writeText(utmurl)
-      .then((error) => {
-        toast.success("URL copied to clipboard");
-      })
-      .catch((err) => {
-        toast.error("Failed to copy: ", err);
-      });
+    if (utmurl.length > 0) {
+      navigator.clipboard
+        .writeText(utmurl)
+        .then((error) => {
+          toast.success("URL copied to clipboard");
+        })
+        .catch((err) => {
+          toast.error("Failed to copy: ", err);
+        });
+    } else {
+      toast.error("Please genrate url first");
+    }
     console.log(utmurl);
   };
 
@@ -262,7 +269,7 @@ const Cname = () => {
                 id="businessUnit"
                 value={specie}
                 onChange={handleLeadgenChange}
-                className="w-full bg-gray-400 hover:bg-gray-400"
+                className="w-full bg-gray-400 hover:bg-gray-400 border-gray-400 "
                 disabled="true"
               >
                 {Types_for_Leadgen[businessUnit].map((val, key) => (
@@ -295,7 +302,7 @@ const Cname = () => {
                 id="category"
                 value={Category}
                 onChange={handleCateogoryChange}
-                className="w-full bg-gray-400 hover:bg-gray-400"
+                className="w-full bg-gray-400 hover:bg-gray-400 border-gray-400"
                 disabled="true"
               >
                 {Types_for_Campaign[businessUnit].map((val, key) => (
@@ -336,7 +343,7 @@ const Cname = () => {
         </p>
 
         <div className="w-full md:flex">
-          <div className="relative md:w-3/5 w-full">
+          <div className="relative md:w-8/12 w-full mr-9">
             <input
               type="text"
               value={url}
@@ -353,15 +360,15 @@ const Cname = () => {
               </p>
             )}
           </div>
-          <div className="md:w-2/5 w-full flex md:justify-evenly justify-between md:mt-0 mt-6">
+          <div className="md:w-5/12 w-full flex md:justify-between justify-between md:mt-0 mt-6">
             <button
-              className="buttons text-white font-semibold rounded"
+              className="buttons text-white font-semibold rounded button ml-4"
               onClick={() => handleGenrate()}
             >
               Generate
             </button>
             <button
-              className=" text-white font-semibold rounded buttons"
+              className=" text-white font-semibold rounded buttons button"
               onClick={() => handleRestart()}
             >
               Restart
@@ -375,7 +382,7 @@ const Cname = () => {
           <div className="relative md:w-4/5 w-full">
             <textarea
               value={utmurl}
-              className="w-full pt-2 pb-2 min-h-28 bg-gray-300 border-gray-600 hover:bg-gray-300 pl-2 pr-1 text-gray-500"
+              className="w-full pt-2 pb-2 min-h-28 bg-gray-300 border-gray-600 hover:bg-gray-300 pl-2 pr-1 text-gray-500 rounded-sm"
               disabled
             />
           </div>
@@ -383,8 +390,8 @@ const Cname = () => {
             <button
               className={
                 check
-                  ? "bg-gray-400 buttons font-semibold hover:bg-gray-400"
-                  : "buttons text-white font-semibold rounded h-12 cursor-pointer"
+                  ? "bg-gray-400 buttons pt-3 pb-3 pl-2 pr-2 rounded-md font-semibold hover:bg-gray-400 text-gray-500"
+                  : "buttons text-white font-semibold rounded h-12 cursor-pointer button"
               }
               onClick={() => handleCopy()}
               disabled={check}
@@ -404,6 +411,15 @@ const Cname = () => {
             onClick={() => goBack()}
           />
         </div>
+        <div className="absolute right-0 md:text-4xl text-3xl">
+            <button
+              onClick={() => {
+                navigate("/preview");
+              }}
+            >
+              <VscPreview />
+            </button>
+          </div>
       </div>
     </motion.div>
   );

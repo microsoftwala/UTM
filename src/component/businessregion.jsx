@@ -7,10 +7,19 @@ import Header from "./header";
 import data from "./businessdata";
 import animation from "./animation";
 import { motion } from "framer-motion";
+import { VscPreview } from "react-icons/vsc";
 
 const Businessregion = () => {
-  const { businessUnit, region, setRegion, businessline, setBusinessline } =
-    useGlobalState();
+  const {
+    businessUnit,
+    region,
+    setRegion,
+    businessline,
+    setBusinessline,
+    setLastroute,
+  } = useGlobalState();
+
+  setLastroute("/business");
 
   const handleClick = (campaign) => {
     if (region === "") {
@@ -120,7 +129,7 @@ const Businessregion = () => {
                 id="businessUnit"
                 value={businessline}
                 onChange={handlebusinessUnitChange}
-                className="w-3/4 bg-gray-400 hover:bg-gray-400"
+                className="w-3/4 bg-gray-400 hover:bg-gray-400 border-gray-400"
                 disabled="true"
               >
                 {Types[businessUnit].map((val, key) => (
@@ -142,11 +151,20 @@ const Businessregion = () => {
           />
         </div>
         <button
-          className=" text-white font-semibold rounded"
+          className=" text-white font-semibold rounded button"
           onClick={() => handleClick()}
         >
           Continue
         </button>
+        <div className="absolute right-1 md:text-4xl text-3xl">
+          <button
+            onClick={() => {
+              navigate("/preview");
+            }}
+          >
+            <VscPreview />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
