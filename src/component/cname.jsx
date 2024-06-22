@@ -358,7 +358,7 @@ const Cname = () => {
               className="buttons text-white font-semibold rounded"
               onClick={() => handleGenrate()}
             >
-              Genrate
+              Generate
             </button>
             <button
               className=" text-white font-semibold rounded buttons"
