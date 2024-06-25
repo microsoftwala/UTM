@@ -60,19 +60,10 @@ const Cname = () => {
   else if (selectedCampaign === "Organic Social")
     setSelectedCampaign("social_post");
   else if (selectedCampaign === "Display") setSelectedCampaign("display");
-  else if (selectedCampaign === "Email") setSelectedCampaign("email");
+  else if (selectedCampaign === "Emailer") setSelectedCampaign("email");
   else if (selectedCampaign === "Print") setSelectedCampaign("print");
-  else if (
-    !(
-      selectedCampaign === "print" ||
-      selectedCampaign === "email" ||
-      selectedCampaign === "display" ||
-      selectedCampaign === "social_post" ||
-      selectedCampaign === "social_ad" ||
-      selectedCampaign === "search_ad"
-    )
-  )
-    setSelectedCampaign("website");
+  else if (selectedCampaign === "Other") setSelectedCampaign("website");
+  console.log(selectedCampaign);
 
   const [check, setCheck] = useState(true);
 
