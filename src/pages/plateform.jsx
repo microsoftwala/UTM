@@ -85,7 +85,7 @@ const Plateform = () => {
     >
     <Header />
 
-      <p className="title font-bold md:ml-8 ml-4"> Choose your parameters</p>
+      <p className="title font-bold md:ml-8 ml-4"> Choose your platform</p>
 
       <p className="subtitle md:ml-8 ml-4 mt-4">
         The selection below will set the value in "utm_sources" parameters
