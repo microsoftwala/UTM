@@ -19,11 +19,11 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/campaign" element={<Campaign />} />
-        <Route path="/plateform" element={<Plateform />} />
-        <Route path="/business" element={<Businessregion />} />
-        <Route path="/cateogory" element={<Cateogory />} />
-        <Route path="/parameter" element={<Parameter />} />
+        <Route path="/campaign&platform" element={<Campaign />} />
+        {/* <Route path="/plateform" element={<Plateform />} /> */}
+        <Route path="/business&category&parameter" element={<Businessregion />} />
+        {/* <Route path="/cateogory" element={<Cateogory />} />
+        <Route path="/parameter" element={<Parameter />} /> */}
         <Route path="/cname" element={<Cname />} />
         <Route path="/preview" element={<Preview />} />
       </Routes>

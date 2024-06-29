@@ -11,6 +11,7 @@ import animation from "../component/animation";
 import Footer from "../component/footer";
 import "react-toastify/dist/ReactToastify.css";
 import PreviewButton from "../component/previewbutton";
+import ShowNavBar from "../component/showNavbar";
 
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
@@ -20,12 +21,32 @@ const formatDate = (date) => {
   return `${day}${month}${year}`;
 };
 
+const formatDateTime1 = (date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = String(date.getFullYear()).slice(-4);
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+
+  return `${day}-${month}-${year}/${hours}:${minutes}:${seconds}`;
+};
+
+const formDataToObject = (formData) => {
+  const object = {};
+  formData.forEach((value, key) => {
+    object[key] = value;
+  });
+  return object;
+};
+
 const formatString = (input) => {
   return input.trim().replace(/\s+/g, " ").replace(/\s/g, "_");
 };
 
 const Cname = () => {
   const {
+    setOndisable,
     businessUnit,
     setLastroute,
     selectedCampaign,
@@ -49,6 +70,9 @@ const Cname = () => {
     campaignname,
     setCampaignname,
   } = useGlobalState();
+  setOndisable(false); //for plateform
+  const [showNav, setShownav] = useState(true);
+  const navigate = useNavigate();
   setLastroute("/cname");
   if (other === "Other") setOther("");
   if (content === "Other") setContent("");
@@ -63,120 +87,172 @@ const Cname = () => {
   else if (selectedCampaign === "Emailer") setSelectedCampaign("email");
   else if (selectedCampaign === "Print") setSelectedCampaign("print");
   else if (selectedCampaign === "Other") setSelectedCampaign("website");
-  console.log(selectedCampaign);
 
   const [check, setCheck] = useState(true);
 
-  const handleRestart = () => {
-    navigate("/campaign");
-  };
-
-  const currentDate = new Date();
-  const formattedDate = formatDate(currentDate);
+  const formattedDate = formatDate(new Date());
 
   const [utmurl, setUtmurl] = useState("");
+
+  // Create a new FormData object
+  const formData = new FormData();
 
   const handleGenrate = () => {
     const campaignname1 = formatString(campaignname);
     const description1 = formatString(description);
     const other1 = formatString(other);
+
     if (businessUnit === "Human Nutrition") {
-      setUtmurl(
+      const utm_url =
         url +
-          "?utm_source=" +
-          selectedPlateform.toLowerCase() +
-          "&utm_medium=" +
-          selectedCampaign +
-          "&utm_campaign=" +
-          campaignname1 +
-          "_" +
-          Category +
-          "_&utm_term=" +
-          businessline +
-          "_" +
-          region +
-          "&utm_content=" +
-          content +
-          other1 +
-          "_" +
-          formattedDate +
-          "&utm_vechile=" +
-          description1
-      );
+        "?utm_source=" +
+        selectedPlateform.toLowerCase() +
+        "&utm_medium=" +
+        selectedCampaign +
+        "&utm_campaign=" +
+        campaignname1 +
+        "_" +
+        Category +
+        "_&utm_term=" +
+        businessline +
+        "_" +
+        region +
+        "&utm_content=" +
+        content +
+        other1 +
+        "_" +
+        formattedDate +
+        "&utm_vechile=" +
+        description1;
+      setUtmurl(utm_url);
+      formData.append("UTM_URL", utm_url);
     } else if (businessUnit === "Personal Care") {
-      setUtmurl(
+      const utm_url =
         url +
-          "?utm_source=" +
-          selectedPlateform.toLowerCase() +
-          "&utm_medium=" +
-          selectedCampaign +
-          "&utm_campaign=" +
-          campaignname1 +
-          "_" +
-          Category +
-          "_&utm_term=" +
-          cateogory +
-          "_" +
-          businessline +
-          "_" +
-          region +
-          "&utm_content=" +
-          content +
-          other1 +
-          "_" +
-          formattedDate
-      );
+        "?utm_source=" +
+        selectedPlateform.toLowerCase() +
+        "&utm_medium=" +
+        selectedCampaign +
+        "&utm_campaign=" +
+        campaignname1 +
+        "_" +
+        Category +
+        "_&utm_term=" +
+        cateogory +
+        "_" +
+        businessline +
+        "_" +
+        region +
+        "&utm_content=" +
+        content +
+        other1 +
+        "_" +
+        formattedDate;
+      setUtmurl(utm_url);
+      formData.append("UTM_URL", utm_url);
     } else if (businessUnit === "Animal Health & Nutrition") {
-      setUtmurl(
+      const utm_url =
         url +
-          "?utm_source=" +
-          selectedPlateform.toLowerCase() +
-          "&utm_medium=" +
-          selectedCampaign +
-          "&utm_campaign=" +
-          campaignname1 +
-          "_" +
-          Category +
-          "_&utm_term=" +
-          specie +
-          "_" +
-          cateogory +
-          "_" +
-          businessline +
-          "_" +
-          region +
-          "&utm_content=" +
-          content +
-          other1 +
-          "_" +
-          formattedDate
-      );
+        "?utm_source=" +
+        selectedPlateform.toLowerCase() +
+        "&utm_medium=" +
+        selectedCampaign +
+        "&utm_campaign=" +
+        campaignname1 +
+        "_" +
+        Category +
+        "_&utm_term=" +
+        specie +
+        "_" +
+        cateogory +
+        "_" +
+        businessline +
+        "_" +
+        region +
+        "&utm_content=" +
+        content +
+        other1 +
+        "_" +
+        formattedDate;
+      setUtmurl(utm_url);
+      formData.append("UTM_URL", utm_url);
     } else if (businessUnit === "TTH ISOL") {
-      setUtmurl(
+      const utm_url =
         url +
-          "?utm_source=" +
-          selectedPlateform.toLowerCase() +
-          "&utm_medium=" +
-          selectedCampaign +
-          "&utm_campaign=" +
-          campaignname1 +
-          "_" +
-          leadgen +
-          "_" +
-          "&utm_term=" +
-          cateogory +
-          "_" +
-          businessline +
-          "_" +
-          region +
-          "&utm_content=" +
-          content +
-          other1 +
-          "_" +
-          formattedDate +
-          "&utm_vechile=" +
-          description1
-      );
+        "?utm_source=" +
+        selectedPlateform.toLowerCase() +
+        "&utm_medium=" +
+        selectedCampaign +
+        "&utm_campaign=" +
+        campaignname1 +
+        "_" +
+        leadgen +
+        "_" +
+        "&utm_term=" +
+        cateogory +
+        "_" +
+        businessline +
+        "_" +
+        region +
+        "&utm_content=" +
+        content +
+        other1 +
+        "_" +
+        formattedDate +
+        "&utm_vechile=" +
+        description1;
+      setUtmurl(utm_url);
+      formData.append("UTM_URL", utm_url);
+    }
+
+    formData.append("TimeDate", formatDateTime1(new Date()));
+    formData.append("Business_Unit", businessUnit);
+    formData.append("Campaign", selectedCampaign);
+    formData.append("Platform", selectedPlateform);
+    formData.append("Region", region);
+    formData.append("Business_Line", businessline);
+    formData.append("Specie", specie);
+    formData.append("Category", cateogory);
+    formData.append("Content", content);
+    formData.append("Other", other1);
+    formData.append("Description", description1);
+    formData.append("Campaign_Type", leadgen);
+    formData.append("Select_Category_Type", Category);
+    formData.append("Campaign_Name", campaignname1);
+    formData.append("URL", url);
+
+    const Data_In_Object = formDataToObject(formData);
+
+    if (businessUnit !== "Select a Business Unit") {
+      // fetch("http://localhost:3001/update_data", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(Data_In_Object),
+      // })
+      // .then((response) => response.json())
+      // .then((data) => console.log(data))
+      // .catch((error) => console.error('Error:', error));
+      // fetch(
+      //   "https://script.google.com/macros/s/AKfycbyGhTiK6ZwGg9JLSjWFoeqjbr2OYuYklB9FKJTQ9S1ggFQvW-9MmSx5RYjgVUGeiWTj/exec",
+      //   {
+      //     method: "POST",
+      //     body: formData,
+      //   }
+      // )
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       throw new Error(
+      //         "Network response was not ok " + response.statusText
+      //       );
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((data) => console.log(data))
+      //   .catch((error) =>
+      //     console.error("There was a problem with the fetch operation:", error)
+      //   );
     }
     setCheck(false);
   };
@@ -210,13 +286,6 @@ const Cname = () => {
     }
     console.log(utmurl);
   };
-
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate("/parameter");
-  };
-
   const { fadeTransition, fadeVariants } = animation;
 
   return (
@@ -228,9 +297,16 @@ const Cname = () => {
       variants={fadeVariants}
       transition={fadeTransition}
     >
-      <Header />
+      <div className="fixed bg-white z-10 top-0">
+        <Header on={true} />
+      </div>
+      <div className="relative">
+        <div className="fixed left-4 md:top-8 top-10 z-20">
+          <ShowNavBar showNav={showNav} setShownav={setShownav} />
+        </div>
+      </div>
 
-      <div className="mt-16 mb-16 ml-10 mr-10 md:mr-0">
+      <div className="md:mt-28 mt-56 mb-16 ml-10 mr-10 md:mr-0">
         <div className="mb-14 md:flex md:justify-between w-full">
           <div className="md:w-1/3 w-full mr-6">
             <p className="font-bold text-xl">Select Campaign Type</p>
@@ -353,7 +429,7 @@ const Cname = () => {
             </button>
             <button
               className=" text-white font-semibold rounded buttons button"
-              onClick={() => handleRestart()}
+              onClick={() => navigate("/campaign&platform")}
             >
               Restart
             </button>
@@ -389,7 +465,7 @@ const Cname = () => {
       </div>
 
       <div className="relative flex justify-center items-center h-16 pt-14">
-        <Footer goBack={goBack} />
+        <Footer goBack={() => navigate("/business&category&parameter")} />
         <div className="absolute right-1 md:text-4xl text-3xl">
           <PreviewButton />
         </div>

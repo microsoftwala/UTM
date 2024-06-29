@@ -14,6 +14,10 @@ const fadeTransition = {
   duration: 0.6,
 };
 
+const fadeTransition1 = {
+  duration:1.2,
+}
+
 const popupVariants = {
   hidden: {
     opacity: 0,
@@ -39,4 +43,5 @@ export default {
   fadeVariants,
   popupTransition,
   popupVariants,
+  fadeTransition1
 };

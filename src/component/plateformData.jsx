@@ -1,4 +1,5 @@
 const TTH_ISOL = [
+  "Choose_data",
   "Foodingredientsfirst",
   "Foodnavigator",
   "Dairyreporter",
@@ -32,6 +33,7 @@ const TTH_ISOL = [
 ];
 
 const Human_Nutrition = [
+  "Choose_data",
   "nutraingredients",
   "food_navigator",
   "natural_products_insider",

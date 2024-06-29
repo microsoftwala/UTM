@@ -7,15 +7,21 @@ import "reactjs-popup/dist/index.css";
 import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
+import ShowNavBar from "../component/showNavbar";
 
 function Homescreen() {
   const navigate = useNavigate();
-  const { businessUnit, setBusinessUnit, setCheckfordisplay, setLastroute } =
+  const { businessUnit, setBusinessUnit, setCheckfordisplay, setLastroute,setOndisable,setOndisable2,setOndisable1 } =
     useGlobalState();
   setLastroute("/");
   const [open, setOpen] = useState(false);
+  const [showNav, setShownav] = useState(true);
   const { fadeTransition, fadeVariants, popupTransition, popupVariants } =
     animation;
+
+  setOndisable(false)//for plateform
+  setOndisable1(false)//for category
+  setOndisable2(false)//for parameter
 
   const handleBusinessUnitChange = (event) => {
     setBusinessUnit(event.target.value);
@@ -28,19 +34,22 @@ function Homescreen() {
       setOpen(true);
       return;
     }
-    navigate("/campaign");
+    navigate("/campaign&platform");
   };
 
   return (
     <motion.div
-      className="container"
+      className="container h-screen flex flex-col"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition}
     >
-      <div className="header">
+      <div className="header relative">
+        <div className="absolute left-1 top-8">
+          <ShowNavBar showNav={showNav} setShownav={setShownav} />
+        </div>
         <img
           src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
           alt="dsm-firmenich"
@@ -92,6 +101,7 @@ function Homescreen() {
             <option value="Biomedical">Biomedical</option>
           </select>
         </div>
+
         <div className="pt-10 relative w-full flex justify-center">
           <button onClick={handleGetStarted} className="font-semibold button">
             Get Started

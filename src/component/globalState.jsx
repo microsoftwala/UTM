@@ -20,9 +20,17 @@ export const GlobalStateProvider = ({ children }) => {
   const [url, setUrl] = useState("");
   const [campaignname, setCampaignname] = useState("");
   const [lastroute, setLastroute] = useState("/");
+  const [onDisable, setOndisable] = useState(false);
+  const [onDisable1, setOndisable1] = useState(false);
+  const [onDisable2, setOndisable2] = useState(false);
+
   return (
     <GlobalStateContext.Provider
       value={{
+        onDisable1,
+        setOndisable1,
+        onDisable2,
+        setOndisable2,
         businessUnit,
         setBusinessUnit,
         selectedCampaign,
@@ -31,6 +39,8 @@ export const GlobalStateProvider = ({ children }) => {
         setSelectedPlateform,
         firstarray,
         setFirstarray,
+        onDisable,
+        setOndisable,
         checkfordisplay,
         setCheckfordisplay,
         region,

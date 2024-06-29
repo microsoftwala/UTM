@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
-import Header from "../component/header";
 import data from "../component/parameterdata";
 import { motion } from "framer-motion";
 import animation from "../component/animation";
@@ -10,7 +9,7 @@ import Footer from "../component/footer";
 import Continue from "../component/continue";
 import PreviewButton from "../component/previewbutton";
 
-const Parameter = () => {
+const Parameter = ({ changeOndisable2, changeOndisable1 }) => {
   const {
     setLastroute,
     businessUnit,
@@ -20,33 +19,23 @@ const Parameter = () => {
     setDescription,
     other,
     setOther,
+    setOnDisable1,
+    onDisable1,
   } = useGlobalState();
-  setLastroute("/parameter");
-  const clearInput = () => {
-    setDescription("");
-  };
 
-  const clearOtherInput = () => {
-    setOther("");
-  };
-
-  const handleClick = (campaign) => {
-    navigate("/cname");
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
+  const navigate = useNavigate();
+  setLastroute("/business&category&parameter");
 
   const { Types_for_Content } = data;
 
-  const navigate = useNavigate();
-
   const goBack = () => {
     if (businessUnit === "Human Nutrition") {
-      navigate("/business");
+      // navigate("/business");
+      changeOndisable1();
+      changeOndisable2();
     } else {
-      navigate("/cateogory");
+      // navigate("/cateogory");
+      changeOndisable2();
     }
   };
 
@@ -61,14 +50,15 @@ const Parameter = () => {
   const classname = content === "Other" ? "md:w-1/2 w-full" : "w-full";
   return (
     <motion.div
-      className="container1"
+      // className="container1"
+      className="mt-16 flex flex-col"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition}
     >
-      <Header />
+      {/* <Header /> */}
 
       <div className="mt-16 mb-16 ml-10 mr-10 md:mr-0">
         <div className="mb-14 md:flex justify-between w-full">
@@ -128,7 +118,7 @@ const Parameter = () => {
                   />
                   {other && (
                     <p
-                      onClick={clearOtherInput}
+                      onClick={() => setOther("")}
                       className="absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl cursor-pointer md:pt-0 pt-3"
                     >
                       &times;
@@ -158,13 +148,13 @@ const Parameter = () => {
               <input
                 type="text"
                 value={description}
-                onChange={handleDescriptionChange}
+                onChange={(event) => setDescription(event.target.value)}
                 className="w-full"
                 placeholder="Enter Vehicle Value..."
               />
               {description && (
                 <p
-                  onClick={clearInput}
+                  onClick={() => setDescription("")}
                   className="absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl cursor-pointer md:pt-0 pt-3"
                 >
                   &times;
@@ -175,9 +165,9 @@ const Parameter = () => {
         </div>
       </div>
 
-      <div className="relative flex justify-center items-center h-16 pt-14 mb-12 md:mb-0">
+      <div className="relative flex justify-center items-center h-16 pt-14 mb-10">
         <Footer goBack={goBack} />
-        <Continue handleClick={handleClick} />
+        <Continue handleClick={() => navigate("/cname")} />
         <div className="absolute right-1 md:text-4xl text-3xl">
           <PreviewButton />
         </div>

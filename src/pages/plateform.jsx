@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "../css/campaign.css";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
-import Header from "../component/header";
 import data from "../component/plateformData";
 import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
+import Footer from "../component/footer";
+import Continue from "../component/continue";
 
-const Plateform = () => {
+const Plateform = ({ onDisable }) => {
   const navigate = useNavigate();
   const {
     businessUnit,
@@ -19,10 +19,8 @@ const Plateform = () => {
     firstarray,
     checkfordisplay,
     setCheckfordisplay,
-    setLastroute,
+    // setLastroute,
   } = useGlobalState();
-
-  setLastroute("/plateform");
 
   const [windowwidth, setWindowwidth] = useState(window.innerWidth);
 
@@ -36,14 +34,24 @@ const Plateform = () => {
     setSelectedPlateform(event.target.value);
     handleClick(event.target.value);
   };
+
   const handleClick = (campaign) => {
     setSelectedPlateform(campaign);
     if (campaign === "Display Other") {
       setCheckfordisplay(true);
       return;
     }
-    navigate("/business");
+    if (
+      campaign === "Display Other" ||
+      campaign === "Choose_data"
+    ) {
+      alert("Choose Display Other Parameter First !!!");
+      return;
+    }
+    navigate("/business&category&parameter");
   };
+
+  // const handleNextPage = () => {};
 
   const plateForm1 = ["Google"];
   const plateForm2 = ["Facebook", "Twitter", "Instagram", "LinkedIn"];
@@ -58,7 +66,7 @@ const Plateform = () => {
     const handleResize = () => {
       setWindowwidth(window.innerWidth);
       if (window.innerWidth < 840) {
-        setButtonClass("mx-20 buttons-grid5 mb-10");
+        setButtonClass("mx-10 buttons-grid5 mb-10");
       } else {
         setButtonClass("mx-10 buttons-grid4 mb-10");
       }
@@ -69,27 +77,27 @@ const Plateform = () => {
     };
   }, []);
 
-  const goBack = () => {
-    navigate("/campaign");
-  };
-
-  const { fadeTransition, fadeVariants } = animation;
+  const { fadeTransition1, fadeVariants } = animation;
   return (
     <motion.div
-      className="container1"
+      // className="container1"
+      className="mt-16 flex flex-col h-full"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
-      transition={fadeTransition}
+      transition={fadeTransition1}
     >
-    <Header />
+      <div>
+        <p className="title font-bold md:ml-8 ml-4 flex justify-center md:justify-start">
+          {" "}
+          Choose your platform
+        </p>
 
-      <p className="title font-bold md:ml-8 ml-4"> Choose your platform</p>
-
-      <p className="subtitle md:ml-8 ml-4 mt-4">
-        The selection below will set the value in "utm_sources" parameters
-      </p>
+        <p className="subtitle md:ml-8 ml-4 mt-4 flex justify-center md:justify-start">
+          The selection below will set the value in "utm_sources" platforms
+        </p>
+      </div>
 
       <div className="mb-20">
         <div className={buttonClass}>
@@ -209,7 +217,7 @@ const Plateform = () => {
             firstarray === "Human Nutrition" &&
             checkfordisplay && (
               <select
-                id="businessUnit"
+                id="selectedPlateform"
                 value={selectedPlateform}
                 onChange={handleplateformsUnitChange}
               >
@@ -239,13 +247,13 @@ const Plateform = () => {
         </div>
       </div>
 
-      <div className="mt-36 w-full relative">
-        <IoArrowBackCircleOutline
-          className="md:text-6xl text-5xl text-blue-700 cursor-pointer font-semibold"
-          onClick={() => goBack()}
-        />
-        <div className="absolute right-1 md:text-4xl text-3xl bottom-2">
-          <PreviewButton />
+      <div className="relative flex justify-center items-center pt-14 mb-8">
+        <Footer goBack={() => onDisable()} onDisable={false} />
+        {/* {selectedPlateform.length > 0 && (
+          <Continue handleClick={handleNextPage} onDisable={false} />
+        )} */}
+        <div className="absolute right-1 md:text-4xl text-3xl">
+          <PreviewButton onDisable={false} />
         </div>
       </div>
     </motion.div>

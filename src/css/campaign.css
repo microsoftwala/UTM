@@ -1,11 +1,13 @@
 .container1 {
       max-width: 1366px;
-      margin:6px auto 30px;
-      padding: 2% 5%;
+      margin:0 auto 30px;
+      padding: 0 5% 2%;
       background-color: #fff;
       border-radius: 10px;
       scroll-behavior: smooth;
+      min-height: 450px;
     }
+
 
 input{
   border:2px solid rgb(75, 73, 207);
@@ -26,6 +28,30 @@ input:hover{
       height:53px;
       /* Extra */
       width: 25%;
+}
+
+@media (min-width:1200px) {
+  .box{
+    width:1110px;
+  }
+}
+
+@media (min-width:1250px){
+ .box{
+  width:1160px;
+ }
+}
+
+@media (min-width:1350px) and (max-width:1700px){
+  .box{
+    width:1230px;
+  }
+}
+
+@media (min-width:1700px) and (max-width:2000px){
+  .box{
+    width:1236px;
+  }
 }
 
 .image2{
@@ -77,6 +103,16 @@ input:hover{
       font-weight: bold;
       text-align: center;
     }
+
+    @media(max-width:900px){
+      h1{
+        font-size: 35px;
+        margin-bottom: 7px;
+        margin-top: 3px;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
     
     .subtitle {
       font-size: 16px;
@@ -85,21 +121,37 @@ input:hover{
       margin-bottom: 5%;
     }
 
+    .subtitledisable{
+      font-size: 16px;
+      color: rgb(107 114 128);
+      margin-bottom: 20px;
+      margin-bottom: 5%;
+    }
+
     .title{
       font-size:24px;
     }
+
+    .titledisable{
+      font-size:24px;
+      color:rgb(107 114 128);
+    }
     
     .buttons-grid {
-      display: flex;
-      justify-content: space-evenly;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-content: center; 
+      gap: 10%; 
+      align-items: center; 
+      justify-items: center; 
+      margin-bottom: 10%;
     }
 
     .buttons-grid1 {
-            margin-top: 5%;
-            display: flex;
-            justify-content: space-evenly;
-            gap: 10px;
+        margin-top: 5%;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
       }
     .buttons-grid2 {
       margin-top: 5%;
@@ -112,13 +164,18 @@ input:hover{
       grid-template-columns: repeat(2, 1fr);
       justify-content: center; 
       gap: 10%; 
+      align-items: center; 
+      justify-items: center; 
     }
+    
 
     .buttons-grid4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       justify-content: center; 
       gap: 10%; 
+      align-items: center; 
+      justify-items: center; 
     }
 
     .buttons-grid5{
@@ -126,6 +183,8 @@ input:hover{
       grid-template-columns: repeat(2, 1fr);
       justify-content: center; 
       gap: 10%; 
+      align-items: center; 
+      justify-items: center; 
     }
     
     
@@ -141,6 +200,20 @@ input:hover{
       border:1.5px solid rgb(75, 73, 207);
       color:#337ab7;
       font-weight: 500;
+      margin-bottom:5%;
+    }
+
+    .campaign-button-disable {
+      background-color: rgb(107 114 128);
+      border: none;
+      padding: 10px 5px;
+      width: 145px;
+      font-size: 16px;
+      border-radius: 10px;
+      border:1.5px solid rgb(107 114 128);
+      color:rgb(214, 214, 214);
+      font-weight: 500;
+      margin-bottom:5%;
     }
     
     .campaign-button:hover {
@@ -167,7 +240,7 @@ input:hover{
      .buttons-grid {
         grid-template-columns: repeat(1, 1fr);
       }
-     .campaign-button {
+     .campaign-button,.campaign-button-disable {
         padding: 10px;
       }
     }
@@ -200,6 +273,10 @@ input:hover{
           }
           .title{
             font-size:20px;
+          }
+          .titledisable{
+            font-size:20px;
+            color:rgb(107 114 128);
           }
     }
 
@@ -257,3 +334,5 @@ input:hover{
     width:75%;
   }
 }
+
+

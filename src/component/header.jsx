@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/campaign.css";
 
-const Header = () => {
+const Header = ({ on,onDisable }) => {
   const [windowwidth, setWindowwidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
@@ -13,22 +13,32 @@ const Header = () => {
     };
   }, []);
   return (
-    <div>
+    <div className="md:pt-4">
       {" "}
-      <div>
-        {windowwidth < 890 && (
-          <div>
-            <div className="flex justify-center">
-              <img src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg" alt="dsm-firmenich" className="image2" />
+      {on && (
+        <div>
+          {windowwidth < 768 && (
+            <div>
+              <div className="flex justify-center">
+                <img
+                  src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
+                  alt="dsm-firmenich"
+                  className="image2"
+                />
+              </div>
+              <div className="header"></div>
             </div>
-            <div className="header"></div>
-          </div>
-        )}
-      </div>
-      <div className="flex justify-between">
+          )}
+        </div>
+      )}
+      <div className="flex md:justify-between justify-center box pr-3">
         <h1>Tell us about your campaign</h1>
-        {windowwidth >= 890 && (
-          <img src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg" alt="dsm-firmenich" className="image1" />
+        {windowwidth >= 768 && on && (
+          <img
+            src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
+            alt="dsm-firmenich"
+            className="image1"
+          />
         )}
       </div>
     </div>

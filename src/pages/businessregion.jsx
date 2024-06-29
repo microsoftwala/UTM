@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -9,6 +9,9 @@ import { motion } from "framer-motion";
 import Footer from "../component/footer";
 import Continue from "../component/continue";
 import PreviewButton from "../component/previewbutton";
+import ShowNavBar from "../component/showNavbar";
+import Cateogory from "./cateogory";
+import Parameter from "./parameter";
 
 const Businessregion = () => {
   const {
@@ -18,9 +21,13 @@ const Businessregion = () => {
     businessline,
     setBusinessline,
     setLastroute,
+    setOndisable1,
+    setOndisable2,
+    onDisable1,
+    onDisable2,
   } = useGlobalState();
 
-  setLastroute("/business");
+  setLastroute("/business&category&parameter");
 
   const handleClick = (campaign) => {
     if (region === "") {
@@ -31,21 +38,21 @@ const Businessregion = () => {
     }
 
     if (businessUnit === "Human Nutrition") {
-      navigate("/parameter");
+      setOndisable2(true);
+      // navigate("/parameter");
     } else {
-      navigate("/cateogory");
+      setOndisable1(true);
+      // navigate("/cateogory");
     }
   };
+
+  const [showNav, setShownav] = useState(true);
 
   const Region = ["Global", "EMEA", "APAC", "LATAM", "NA", "GC"];
 
   const { Types } = data;
 
   const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate("/plateform");
-  };
 
   const { fadeTransition, fadeVariants } = animation;
 
@@ -58,20 +65,35 @@ const Businessregion = () => {
 
   return (
     <motion.div
-      className="container1"
+      className="container1 flex flex-col h-screen"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition}
     >
-      <Header />
+      <div className="fixed bg-white z-10">
+        <Header on={true} />
+      </div>
+      <div className="relative">
+        <div className="fixed left-3 md:top-8 top-10 z-20">
+          <ShowNavBar showNav={showNav} setShownav={setShownav} />
+        </div>
+      </div>
 
-      <div className="mt-16 mb-16 mx-10">
+      <div className="mt-56 md:mt-auto mb-auto mx-10">
         <div className="mb-14 md:flex justify-between w-full">
-          <div className="md:w-1/2 w-full ">
-            <p className="font-bold text-2xl">Select Region</p>
-            <p>
+          <div className="md:w-1/2 w-full">
+            <p
+              className={
+                onDisable1 || onDisable2
+                  ? "text-gray-500 font-bold text-2xl"
+                  : "font-bold text-2xl"
+              }
+            >
+              Select Region
+            </p>
+            <p className={(onDisable1 || onDisable2) && "text-gray-500"}>
               The selection here will set the value in
               <br />
               "utm_term" parameters
@@ -82,7 +104,12 @@ const Businessregion = () => {
               id="businessUnit"
               value={region}
               onChange={(event) => setRegion(event.target.value)}
-              className="md:w-3/4 w-full"
+              className={
+                onDisable1 || onDisable2
+                  ? "md:w-3/4 w-full bg-gray-400 hover:bg-gray-400 border-gray-400"
+                  : "md:w-3/4 w-full"
+              }
+              disabled={onDisable1}
             >
               {Region.map((val, key) => (
                 <option key={key} value={val}>
@@ -93,56 +120,79 @@ const Businessregion = () => {
           </div>
         </div>
 
-        <div className="md:flex justify-between w-full">
-          <div className="md:w-1/2 w-full">
-            <p className="font-bold text-2xl">Select Business Line</p>
-            <p>
-              The selection here will set the value in
-              <br />
-              "utm_content" or "utm_term" parameters
-            </p>
-          </div>
-          <div className="md:w-1/2 w-full pt-2">
-            {Types[businessUnit].length > 0 &&
-            Types[businessUnit][0] !== "Not Applicable" ? (
-              <select
-                id="businessUnit"
-                value={businessline}
-                onChange={(event) => setBusinessline(event.target.value)}
-                className="md:w-3/4 w-full"
-              >
-                {Types[businessUnit].map((val, key) => (
-                  <option key={key} value={val}>
-                    {val}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <select
-                id="businessUnit"
-                value={businessline}
-                onChange={(event) => setBusinessline(event.target.value)}
-                className="md:w-3/4 w-full bg-gray-400 hover:bg-gray-400 border-gray-400"
-                disabled="true"
-              >
-                {Types[businessUnit].map((val, key) => (
-                  <option key={key} value={val}>
-                    {val}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
+        {Types[businessUnit].length > 0 &&
+          Types[businessUnit][0] !== "Not Applicable" && (
+            <div className="md:flex justify-between w-full">
+              <div className="md:w-1/2 w-full">
+                <p
+                  className={
+                    onDisable1 || onDisable2
+                      ? "text-gray-500 font-bold text-2xl"
+                      : "font-bold text-2xl"
+                  }
+                >
+                  Select Business Line
+                </p>
+                <p className={(onDisable1 || onDisable2) && "text-gray-500"}>
+                  The selection here will set the value in
+                  <br />
+                  "utm_content" or "utm_term" parameters
+                </p>
+              </div>
+              <div className="md:w-1/2 w-full pt-2">
+                {Types[businessUnit].length > 0 &&
+                  Types[businessUnit][0] !== "Not Applicable" && (
+                    <select
+                      id="businessUnit"
+                      value={businessline}
+                      onChange={(event) => setBusinessline(event.target.value)}
+                      className={
+                        onDisable1 || onDisable2
+                          ? "bg-gray-400 hover:bg-gray-400 border-gray-400 md:w-3/4 w-full"
+                          : "md:w-3/4 w-full"
+                      }
+                      disabled={onDisable1}
+                    >
+                      {Types[businessUnit].map((val, key) => (
+                        <option key={key} value={val}>
+                          {val}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+              </div>
+            </div>
+          )}
+      </div>
+
+      <div className="relative flex justify-center items-center h-16 pt-14 mb-10 md:mb-0">
+        <Footer
+          goBack={() => navigate("/campaign&platform")}
+          onDisable={onDisable1 || onDisable2}
+        />
+        <Continue
+          handleClick={handleClick}
+          onDisable={onDisable1 || onDisable2}
+        />
+        <div className="absolute right-1 md:text-4xl text-3xl">
+          <PreviewButton onDisable={onDisable1 || onDisable2} />
         </div>
       </div>
 
-      <div className="relative flex justify-center items-center h-16 pt-14 mb-12 md:mb-0">
-        <Footer goBack={goBack} />
-        <Continue handleClick={handleClick} />
-        <div className="absolute right-1 md:text-4xl text-3xl">
-          <PreviewButton />
-        </div>
-      </div>
+      {onDisable1 &&
+        businessUnit !== "Human Nutrition" &&
+        businessUnit.length > 0 && (
+          <Cateogory
+            changeOndisable1={() => setOndisable1(false)}
+            changeOndisable2={() => setOndisable2(true)}
+          />
+        )}
+      {onDisable2 && (
+        <Parameter
+          changeOndisable2={() => setOndisable2(false)}
+          changeOndisable1={() => setOndisable1(false)}
+        />
+      )}
     </motion.div>
   );
 };
