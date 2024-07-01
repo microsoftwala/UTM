@@ -42,6 +42,10 @@ const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
 
   const navigate = useNavigate();
 
+  if (businessUnit === "Select a Business Unit") {
+    navigate("/");
+  }
+
   const { fadeTransition, fadeVariants } = animation;
   return (
     <motion.div

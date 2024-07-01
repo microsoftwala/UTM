@@ -11,21 +11,26 @@ import Parameter from "./pages/parameter.jsx";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { GlobalStateProvider } from "./component/globalState.jsx";
 import { AnimatePresence } from "framer-motion";
+import Nopage from "./pages/Nopage.jsx";
 
 function AnimatedRoutes() {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/campaign&platform" element={<Campaign />} />
         {/* <Route path="/plateform" element={<Plateform />} /> */}
-        <Route path="/business&category&parameter" element={<Businessregion />} />
+        <Route
+          path="/business&category&parameter"
+          element={<Businessregion />}
+        />
         {/* <Route path="/cateogory" element={<Cateogory />} />
         <Route path="/parameter" element={<Parameter />} /> */}
         <Route path="/cname" element={<Cname />} />
         <Route path="/preview" element={<Preview />} />
+        <Route path="/:id" element={<Nopage />} />
       </Routes>
     </AnimatePresence>
   );
@@ -44,7 +49,6 @@ function App() {
 }
 
 export default App;
-
 
 // import "./App.css";
 // import Home from "./component/homescreen.jsx";

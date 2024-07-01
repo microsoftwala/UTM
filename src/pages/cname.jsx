@@ -96,6 +96,9 @@ const Cname = () => {
 
   // Create a new FormData object
   const formData = new FormData();
+  if (businessUnit === "Select a Business Unit") {
+    navigate("/");
+  }
 
   const handleGenrate = () => {
     const campaignname1 = formatString(campaignname);

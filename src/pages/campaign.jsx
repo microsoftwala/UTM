@@ -40,6 +40,10 @@ const Campaign = () => {
     setOndisable(false);
   };
 
+  if (businessUnit === "Select a Business Unit") {
+    navigate("/");
+  }
+
   const handleCampaign = (campaign) => {
     setSelectedCampaign(campaign);
     if (businessUnit === "Human Nutrition") {

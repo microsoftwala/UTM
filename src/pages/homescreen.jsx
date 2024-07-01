@@ -47,9 +47,9 @@ function Homescreen() {
       transition={fadeTransition}
     >
       <div className="header relative">
-        <div className="absolute left-1 top-8">
+        {businessUnit!== "Select a Business Unit" && <div className="absolute md:left-2 left-1 top-[45%]">
           <ShowNavBar showNav={showNav} setShownav={setShownav} />
-        </div>
+        </div>}
         <img
           src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
           alt="dsm-firmenich"

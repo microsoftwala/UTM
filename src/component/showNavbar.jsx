@@ -7,7 +7,7 @@ const ShowNavBar = ({ showNav, setShownav }) => {
       {" "}
       {showNav ? (
         <div
-          className="absolute z-20 cursor-pointer text-2xl"
+          className="absolute z-20 cursor-pointer text-2xl "
           onClick={() => {
             setShownav(!showNav);
           }}
