@@ -95,7 +95,7 @@ const Plateform = ({ onDisable }) => {
         </p>
 
         <p className="subtitle md:ml-8 ml-4 mt-4 flex justify-center md:justify-start">
-          The selection below will set the value in "utm_sources" platforms
+          The selection below will set the value in "utm_sources" platform
         </p>
       </div>
 
