@@ -11,6 +11,7 @@ import Footer from "../component/footer";
 import Continue from "../component/continue";
 import Plateform from "./plateform";
 import ShowNavBar from "../component/showNavbar";
+import Navbar from "../component/Navbar";
 
 const Campaign = () => {
   const navigate = useNavigate();
@@ -78,14 +79,9 @@ const Campaign = () => {
       transition={fadeTransition}
     >
       <div className="fixed bg-white z-10">
-        <Header on={true} onDisable={onDisable} />
+        <Header on={true} onDisable={onDisable} count={2}/>
       </div>
-      <div className="relative">
-        <div className="fixed left-3 md:top-8 top-10 z-20">
-          <ShowNavBar showNav={showNav} setShownav={setShownav} />
-        </div>
-      </div>
-      <div className={`${windowwidth > 780 ? "mt-24" : "mt-56"}`}>
+      <div className={`${windowwidth > 780 ? "mt-36" : "mt-72"}`}>
         <p
           className={
             onDisable

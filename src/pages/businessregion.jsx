@@ -55,7 +55,9 @@ const Businessregion = () => {
   const navigate = useNavigate();
 
   const { fadeTransition, fadeVariants } = animation;
-
+  if (businessUnit === "Select a Business Unit") {
+    navigate("/");
+  }
   useEffect(() => {
     if (Types[businessUnit].length >= 1) {
       setBusinessline(Types[businessUnit][0]);
@@ -65,7 +67,7 @@ const Businessregion = () => {
 
   return (
     <motion.div
-      className="container1 flex flex-col h-screen"
+      className="container1 flex flex-col"
       initial="initial"
       animate="in"
       exit="out"
@@ -73,15 +75,10 @@ const Businessregion = () => {
       transition={fadeTransition}
     >
       <div className="fixed bg-white z-10">
-        <Header on={true} />
-      </div>
-      <div className="relative">
-        <div className="fixed left-3 md:top-8 top-10 z-20">
-          <ShowNavBar showNav={showNav} setShownav={setShownav} />
-        </div>
+        <Header on={true} count = {3}/>
       </div>
 
-      <div className="mt-56 md:mt-auto mb-auto mx-10">
+      <div className="mt-72 md:mt-44 mb-auto mx-10">
         <div className="mb-14 md:flex justify-between w-full">
           <div className="md:w-1/2 w-full">
             <p

@@ -1,46 +1,65 @@
 import React from "react";
-
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { TiTick } from "react-icons/ti";
 
-const Navbar = ({ setShownav, showNav }) => {
-  const navigate = useNavigate();
+const Navbar = ({ setShownav, showNav, count }) => {
   return (
-    <motion.div
-      className="fixed top-0 left-0 h-screen md:w-1/4 w-5/12 bg-blue-900 text-white flex flex-col justify-around p-4"
-      initial={{ x: "-100%" }}
-      animate={{ x: 0 }}
-      transition={{ type: "spring", stiffness: 100 }}
-    >
+    <motion.div className="flex justify-evenly bg-slate-50 rounded-sm md:mr-2 mr-5">
       <div
-        className="cursor-pointer font-semibold hover:bg-blue-800 p-2 rounded-md md:text-xl"
-        onClick={() => navigate("/")}
+        className={
+          count > 1
+            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
+            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
+        }
       >
         Business Unit
+        {count > 1 && (
+          <div className="flex items-center">
+            <TiTick className="text-green-500 text-xl" />
+          </div>
+        )}
       </div>
       <div
-        className="cursor-pointer font-semibold hover:bg-blue-800 p-2 rounded-md md:text-xl"
-        onClick={() => navigate("/campaign&platform")}
+        className={
+          count > 2
+            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
+            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
+        }
       >
         Campaign & Platform
+        {count > 2 && (
+          <div className="flex items-center">
+            <TiTick className="text-green-500 text-xl" />
+          </div>
+        )}
       </div>
       <div
-        className="cursor-pointer font-semibold hover:bg-blue-800 p-2 rounded-md md:text-xl"
-        onClick={() => navigate("/business&category&parameter")}
+        className={
+          count > 3
+            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
+            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
+        }
       >
         Business & Category & Parameter
+        {count > 3 && (
+          <div className="flex items-center">
+            <TiTick className="text-green-500 text-xl" />
+          </div>
+        )}
       </div>
       <div
-        className="cursor-pointer font-semibold hover:bg-blue-800 p-2 rounded-md md:text-xl"
-        onClick={() => navigate("/cname")}
+        className={
+          count > 4
+            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
+            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
+        }
       >
         Campaign Name
-      </div>
-      <div
-        onClick={() => setShownav(!showNav)}
-        className="hover:bg-blue-800 p-2 rounded-md cursor-pointer font-semibold md:text-xl"
-      >
-        Close
+        {count > 4 && (
+          <div className="flex items-center">
+            <TiTick className="text-green-500 text-xl" />
+          </div>
+        )}
       </div>
     </motion.div>
   );

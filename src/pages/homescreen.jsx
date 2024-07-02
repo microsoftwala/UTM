@@ -8,20 +8,28 @@ import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
 import ShowNavBar from "../component/showNavbar";
+import Navbar from "../component/Navbar";
 
 function Homescreen() {
   const navigate = useNavigate();
-  const { businessUnit, setBusinessUnit, setCheckfordisplay, setLastroute,setOndisable,setOndisable2,setOndisable1 } =
-    useGlobalState();
+  const {
+    businessUnit,
+    setBusinessUnit,
+    setCheckfordisplay,
+    setLastroute,
+    setOndisable,
+    setOndisable2,
+    setOndisable1,
+  } = useGlobalState();
   setLastroute("/");
   const [open, setOpen] = useState(false);
   const [showNav, setShownav] = useState(true);
   const { fadeTransition, fadeVariants, popupTransition, popupVariants } =
     animation;
 
-  setOndisable(false)//for plateform
-  setOndisable1(false)//for category
-  setOndisable2(false)//for parameter
+  setOndisable(false); //for plateform
+  setOndisable1(false); //for category
+  setOndisable2(false); //for parameter
 
   const handleBusinessUnitChange = (event) => {
     setBusinessUnit(event.target.value);
@@ -47,9 +55,10 @@ function Homescreen() {
       transition={fadeTransition}
     >
       <div className="header relative">
-        {businessUnit!== "Select a Business Unit" && <div className="absolute md:left-2 left-1 top-[45%]">
-          <ShowNavBar showNav={showNav} setShownav={setShownav} />
-        </div>}
+        <div className="absolute justify-center md:top-44 w-full top-32 bg-slate-50 rounded-xl">
+          {/* <ShowNavBar showNav={showNav} setShownav={setShownav} /> */}
+          <Navbar count = {1}/>
+        </div>
         <img
           src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
           alt="dsm-firmenich"

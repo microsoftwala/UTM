@@ -11,7 +11,6 @@ import animation from "../component/animation";
 import Footer from "../component/footer";
 import "react-toastify/dist/ReactToastify.css";
 import PreviewButton from "../component/previewbutton";
-import ShowNavBar from "../component/showNavbar";
 
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
@@ -69,9 +68,11 @@ const Cname = () => {
     setUrl,
     campaignname,
     setCampaignname,
+    cateogory1,
+    utmurl,
+    setUtmurl,
   } = useGlobalState();
   setOndisable(false); //for plateform
-  const [showNav, setShownav] = useState(true);
   const navigate = useNavigate();
   setLastroute("/cname");
   if (other === "Other") setOther("");
@@ -92,8 +93,6 @@ const Cname = () => {
 
   const formattedDate = formatDate(new Date());
 
-  const [utmurl, setUtmurl] = useState("");
-
   // Create a new FormData object
   const formData = new FormData();
   if (businessUnit === "Select a Business Unit") {
@@ -104,6 +103,8 @@ const Cname = () => {
     const campaignname1 = formatString(campaignname);
     const description1 = formatString(description);
     const other1 = formatString(other);
+    setCount(5);
+    const cateogory1_1 = formatString(cateogory1);
 
     if (businessUnit === "Human Nutrition") {
       const utm_url =
@@ -141,7 +142,8 @@ const Cname = () => {
         "_" +
         Category +
         "_&utm_term=" +
-        cateogory +
+        (cateogory !== "Other" && cateogory) +
+        cateogory1_1 +
         "_" +
         businessline +
         "_" +
@@ -192,7 +194,8 @@ const Cname = () => {
         leadgen +
         "_" +
         "&utm_term=" +
-        cateogory +
+        (cateogory !== "Other" && cateogory) +
+        cateogory1_1 +
         "_" +
         businessline +
         "_" +
@@ -223,7 +226,6 @@ const Cname = () => {
     formData.append("Select_Category_Type", Category);
     formData.append("Campaign_Name", campaignname1);
     formData.append("URL", url);
-
     const Data_In_Object = formDataToObject(formData);
 
     if (businessUnit !== "Select a Business Unit") {
@@ -289,8 +291,9 @@ const Cname = () => {
     }
     console.log(utmurl);
   };
-  const { fadeTransition, fadeVariants } = animation;
 
+  const { fadeTransition, fadeVariants } = animation;
+  const [count, setCount] = useState(4);
   return (
     <motion.div
       className="container1"
@@ -301,15 +304,10 @@ const Cname = () => {
       transition={fadeTransition}
     >
       <div className="fixed bg-white z-10 top-0">
-        <Header on={true} />
-      </div>
-      <div className="relative">
-        <div className="fixed left-4 md:top-8 top-10 z-20">
-          <ShowNavBar showNav={showNav} setShownav={setShownav} />
-        </div>
+        <Header on={true} count={count} />
       </div>
 
-      <div className="md:mt-28 mt-56 mb-16 ml-10 mr-10 md:mr-0">
+      <div className="md:mt-40 mt-[270px] mb-16 ml-10 mr-10 md:mr-0">
         <div className="mb-14 md:flex md:justify-between w-full">
           <div className="md:w-1/3 w-full mr-6">
             <p className="font-bold text-xl">Select Campaign Type</p>

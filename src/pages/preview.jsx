@@ -25,6 +25,7 @@ const Preview = () => {
     url,
     campaignname,
     lastroute,
+    cateogory1,
   } = useGlobalState();
   const { fadeTransition, fadeVariants } = animation;
 
@@ -75,6 +76,10 @@ const Preview = () => {
           <div className="flex items-center overflow-hidden">
             <p className="font-semibold">Category:</p>
             <p className="ml-2 truncate">{cateogory}</p>
+          </div>
+          <div className="flex items-center overflow-hidden">
+            <p className="font-semibold">Category(if Other):</p>
+            <p className="ml-2 truncate">{cateogory1}</p>
           </div>
           <div className="flex items-center overflow-hidden">
             <p className="font-semibold">Content:</p>

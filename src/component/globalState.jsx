@@ -12,6 +12,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [businessline, setBusinessline] = useState("");
   const [specie, setSpecie] = useState("");
   const [cateogory, setCateogory] = useState("");
+  const [cateogory1, setCateogory1] = useState("");
   const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
   const [other, setOther] = useState("");
@@ -23,6 +24,7 @@ export const GlobalStateProvider = ({ children }) => {
   const [onDisable, setOndisable] = useState(false);
   const [onDisable1, setOndisable1] = useState(false);
   const [onDisable2, setOndisable2] = useState(false);
+  const [utmurl, setUtmurl] = useState("");
 
   return (
     <GlobalStateContext.Provider
@@ -67,6 +69,10 @@ export const GlobalStateProvider = ({ children }) => {
         setCampaignname,
         lastroute,
         setLastroute,
+        cateogory1,
+        setCateogory1,
+        utmurl,
+        setUtmurl,
       }}
     >
       {children}

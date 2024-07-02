@@ -18,9 +18,12 @@ const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
     setCateogory,
     setLastroute,
     onDisable2,
+    cateogory1,
+    setCateogory1,
   } = useGlobalState();
 
   setLastroute("/business&category&parameter");
+
   const handleClick = (campaign) => {
     if (
       specie === "" &&
@@ -139,6 +142,39 @@ const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
                     </option>
                   ))}
                 </select>
+              )}
+
+              {cateogory === "Other" && (
+                <div className="md:w-3/4 w-full pt-2 md:pt-2 input">
+                  <div className="relative w-full md:mt-0 mt-4">
+                    <input
+                      type="text"
+                      value={cateogory1}
+                      onChange={(e) => setCateogory1(e.target.value)}
+                      className={
+                        onDisable2
+                          ? "w-full text-gray-800 bg-gray-400 hover:bg-gray-400 border-gray-400"
+                          : "w-full"
+                      }
+                      placeholder="Enter Content Value..."
+                      disabled={onDisable2}
+                    />
+                    {cateogory && (
+                      <p
+                        onClick={() => {
+                          !onDisable2 && setCateogory1("");
+                        }}
+                        className={
+                          onDisable2
+                            ? "absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl md:pt-2 pt-3"
+                            : "absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl cursor-pointer md:pt-2 pt-3"
+                        }
+                      >
+                        &times;
+                      </p>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           </div>
