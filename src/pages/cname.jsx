@@ -142,7 +142,7 @@ const Cname = () => {
         "_" +
         Category +
         "_&utm_term=" +
-        (cateogory !== "Other" && cateogory) +
+        (cateogory !== "Other" ? cateogory : "") +
         cateogory1_1 +
         "_" +
         businessline +
@@ -194,7 +194,7 @@ const Cname = () => {
         leadgen +
         "_" +
         "&utm_term=" +
-        (cateogory !== "Other" && cateogory) +
+        (cateogory !== "Other" ? cateogory : "") +
         cateogory1_1 +
         "_" +
         businessline +
