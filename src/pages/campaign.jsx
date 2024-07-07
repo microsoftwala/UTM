@@ -8,10 +8,7 @@ import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
 import Footer from "../component/footer";
-import Continue from "../component/continue";
 import Plateform from "./plateform";
-import ShowNavBar from "../component/showNavbar";
-import Navbar from "../component/Navbar";
 
 const Campaign = () => {
   const navigate = useNavigate();
@@ -81,7 +78,7 @@ const Campaign = () => {
       <div className="fixed bg-white z-10">
         <Header on={true} onDisable={onDisable} count={2}/>
       </div>
-      <div className={`${windowwidth > 780 ? "mt-36" : "mt-72"}`}>
+      <div className={`${windowwidth > 780 ? "mt-36" : "mt-[280px]"}`}>
         <p
           className={
             onDisable

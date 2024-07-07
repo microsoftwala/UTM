@@ -1,63 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { TiTick } from "react-icons/ti";
 
 const Navbar = ({ setShownav, showNav, count }) => {
+  const [windowwidth, setWindowwidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowwidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
-    <motion.div className="flex justify-evenly bg-slate-50 rounded-sm md:mr-2 mr-5">
+    <motion.div className="grid grid-cols-4 bg-[#3860B2] rounded-sm border mr-2 border-black ">
       <div
-        className={
-          count > 1
-            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
-            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
-        }
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+          count > 1 ? "text-gray-600 bg-gray-300 " : "text-white"
+        } ${count === 1 && "border-t-[5px] border-t-red-500 bg-white text-black"}`}
       >
-        Business Unit
+        {windowwidth >= 900 ? "Business Unit" : "BU"}
         {count > 1 && (
-          <div className="flex items-center">
-            <TiTick className="text-green-500 text-xl" />
+          <div className="flex items-center ml-2">
+            <TiTick className="text-green-600 text-xl" />
           </div>
         )}
       </div>
       <div
-        className={
-          count > 2
-            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
-            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
-        }
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+          count > 2 ? "text-gray-600 bg-gray-300" : "text-white"
+        } ${count === 2 && "border-t-[5px] border-t-red-500 bg-white text-black"}`}
       >
-        Campaign & Platform
+        {windowwidth >= 900 ? "Campaign & Platform" : "Camp & Plat"}
         {count > 2 && (
-          <div className="flex items-center">
-            <TiTick className="text-green-500 text-xl" />
+          <div className="flex items-center ml-2">
+            <TiTick className="text-green-600 text-xl" />
           </div>
         )}
       </div>
       <div
-        className={
-          count > 3
-            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
-            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
-        }
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+          count > 3 ? "text-gray-600 bg-gray-300" : "text-white"
+        } ${count === 3 && "border-t-[5px] border-t-red-500 bg-white text-black"}`}
       >
-        Business & Category & Parameter
+        {windowwidth >= 900
+          ? "Business & Category & Parameter"
+          : "Busn & Catg & Parm"}
         {count > 3 && (
-          <div className="flex items-center">
-            <TiTick className="text-green-500 text-xl" />
+          <div className="flex items-center ml-2">
+            <TiTick className="text-green-600 text-xl" />
           </div>
         )}
       </div>
       <div
-        className={
-          count > 4
-            ? "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex text-gray-500"
-            : "font-semibold p-2 rounded-md md:text-[18px] text-[14px] flex"
-        }
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex ${
+          count > 4 ? "text-gray-600 bg-gray-300" : "text-white"
+        } ${count === 4 && "border-t-[5px] border-t-red-500 bg-white text-black"}`}
       >
-        Campaign Name
+        {windowwidth >= 900 ? "Campaign Name" : "Camp Name"}
         {count > 4 && (
-          <div className="flex items-center">
-            <TiTick className="text-green-500 text-xl" />
+          <div className="flex items-center ml-2">
+            <TiTick className="text-green-600 text-xl" />
           </div>
         )}
       </div>

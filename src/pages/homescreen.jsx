@@ -7,7 +7,6 @@ import "reactjs-popup/dist/index.css";
 import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
-import ShowNavBar from "../component/showNavbar";
 import Navbar from "../component/Navbar";
 
 function Homescreen() {
@@ -23,7 +22,6 @@ function Homescreen() {
   } = useGlobalState();
   setLastroute("/");
   const [open, setOpen] = useState(false);
-  const [showNav, setShownav] = useState(true);
   const { fadeTransition, fadeVariants, popupTransition, popupVariants } =
     animation;
 
@@ -54,10 +52,9 @@ function Homescreen() {
       variants={fadeVariants}
       transition={fadeTransition}
     >
-      <div className="header relative">
-        <div className="absolute justify-center md:top-44 w-full top-32 bg-slate-50 rounded-xl">
-          {/* <ShowNavBar showNav={showNav} setShownav={setShownav} /> */}
-          <Navbar count = {1}/>
+      <div className="flex justify-center relative w-full items-center pl-[10px] pr-[10px]">
+        <div className="absolute justify-center md:top-40 w-full top-28 bg-slate-50 rounded-xl">
+          <Navbar count={1} />
         </div>
         <img
           src="https://www.dsm-firmenich.com/content/dam/dsm-firmenich/corporate/images/logos/logo-black.svg"
@@ -89,8 +86,8 @@ function Homescreen() {
         </motion.div>
       </Popup>
 
-      <div className="content w-full">
-        <h1 className="h1 flex justify-center items-center text-center pt-2">
+      <div className="content w-full mb-auto mt-auto">
+        <h1 className="h1 flex justify-center items-center text-center pt-3">
           UTM Parameters Automation Utility
         </h1>
         <div className="form-group mt-16">

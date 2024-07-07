@@ -78,7 +78,7 @@ const Businessregion = () => {
         <Header on={true} count = {3}/>
       </div>
 
-      <div className="mt-72 md:mt-44 mb-auto mx-10">
+      <div className="mt-[278px] md:mt-44 mb-auto mx-10">
         <div className="mb-14 md:flex justify-between w-full">
           <div className="md:w-1/2 w-full">
             <p
