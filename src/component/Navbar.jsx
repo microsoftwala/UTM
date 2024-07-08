@@ -15,7 +15,7 @@ const Navbar = ({ setShownav, showNav, count }) => {
   }, []);
   console.log("Hi", count);
   return (
-    <motion.div className="grid grid-cols-4 bg-[#3860B2] rounded-sm border mr-2 border-black ">
+    <motion.div className="grid grid-cols-4 bg-[#3860B2] rounded-sm border mr-2 border-black text-white">
       <div
         className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
           count > 1 && "text-gray-600 bg-gray-300"
