@@ -40,6 +40,9 @@ const formDataToObject = (formData) => {
 };
 
 const formatString = (input) => {
+  if (input === "Google Display Network") {
+    input = "Google";
+  }
   return input.trim().replace(/\s+/g, " ").replace(/\s/g, "_");
 };
 
@@ -51,6 +54,7 @@ const Cname = () => {
     selectedCampaign,
     setSelectedCampaign,
     selectedPlateform,
+    setSelectedPlateform,
     setContent,
     region,
     businessline,
@@ -105,19 +109,20 @@ const Cname = () => {
     const other1 = formatString(other);
     setCount(5);
     const cateogory1_1 = formatString(cateogory1);
+    const selectedPlateform1 = formatString(selectedPlateform);
 
     if (businessUnit === "Human Nutrition") {
       const utm_url =
         url +
         "?utm_source=" +
-        selectedPlateform.toLowerCase() +
+        selectedPlateform1.toLowerCase() +
         "&utm_medium=" +
         selectedCampaign +
         "&utm_campaign=" +
         campaignname1 +
         "_" +
         Category +
-        "_&utm_term=" +
+        "&utm_term=" +
         businessline +
         "_" +
         region +
@@ -134,14 +139,14 @@ const Cname = () => {
       const utm_url =
         url +
         "?utm_source=" +
-        selectedPlateform.toLowerCase() +
+        selectedPlateform1.toLowerCase() +
         "&utm_medium=" +
         selectedCampaign +
         "&utm_campaign=" +
         campaignname1 +
         "_" +
         Category +
-        "_&utm_term=" +
+        "&utm_term=" +
         (cateogory !== "Other" ? cateogory : "") +
         cateogory1_1 +
         "_" +
@@ -159,14 +164,12 @@ const Cname = () => {
       const utm_url =
         url +
         "?utm_source=" +
-        selectedPlateform.toLowerCase() +
+        selectedPlateform1.toLowerCase() +
         "&utm_medium=" +
         selectedCampaign +
         "&utm_campaign=" +
-        campaignname1 +
-        "_" +
         Category +
-        "_&utm_term=" +
+        "&utm_term=" +
         specie +
         "_" +
         cateogory +
@@ -185,7 +188,7 @@ const Cname = () => {
       const utm_url =
         url +
         "?utm_source=" +
-        selectedPlateform.toLowerCase() +
+        selectedPlateform1.toLowerCase() +
         "&utm_medium=" +
         selectedCampaign +
         "&utm_campaign=" +
@@ -209,55 +212,6 @@ const Cname = () => {
         description1;
       setUtmurl(utm_url);
       formData.append("UTM_URL", utm_url);
-    }
-
-    formData.append("TimeDate", formatDateTime1(new Date()));
-    formData.append("Business_Unit", businessUnit);
-    formData.append("Campaign", selectedCampaign);
-    formData.append("Platform", selectedPlateform);
-    formData.append("Region", region);
-    formData.append("Business_Line", businessline);
-    formData.append("Specie", specie);
-    formData.append("Category", cateogory);
-    formData.append("Content", content);
-    formData.append("Other", other1);
-    formData.append("Description", description1);
-    formData.append("Campaign_Type", leadgen);
-    formData.append("Select_Category_Type", Category);
-    formData.append("Campaign_Name", campaignname1);
-    formData.append("URL", url);
-    const Data_In_Object = formDataToObject(formData);
-
-    if (businessUnit !== "Select a Business Unit") {
-      // fetch("http://localhost:3001/update_data", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(Data_In_Object),
-      // })
-      // .then((response) => response.json())
-      // .then((data) => console.log(data))
-      // .catch((error) => console.error('Error:', error));
-      // fetch(
-      //   "https://script.google.com/macros/s/AKfycbyGhTiK6ZwGg9JLSjWFoeqjbr2OYuYklB9FKJTQ9S1ggFQvW-9MmSx5RYjgVUGeiWTj/exec",
-      //   {
-      //     method: "POST",
-      //     body: formData,
-      //   }
-      // )
-      //   .then((response) => {
-      //     if (!response.ok) {
-      //       throw new Error(
-      //         "Network response was not ok " + response.statusText
-      //       );
-      //     }
-      //     return response.json();
-      //   })
-      //   .then((data) => console.log(data))
-      //   .catch((error) =>
-      //     console.error("There was a problem with the fetch operation:", error)
-      //   );
     }
     setCheck(false);
   };
@@ -309,7 +263,14 @@ const Cname = () => {
 
       <div className="md:mt-40 mt-[270px] mb-16 ml-10 mr-10 md:mr-0">
         <div className="mb-14 md:flex md:justify-between w-full">
-          <div className="md:w-1/3 w-full mr-6">
+          <div
+            className={`md:${
+              Category === "other" ||
+              Types_for_Campaign[businessUnit][0] === "Other"
+                ? "w-1/3"
+                : "w-1/2"
+            }  w-full mr-6`}
+          >
             <p className="font-bold text-xl">Select Campaign Type</p>
             <div className="w-full pt-2"></div>
             {Types_for_Leadgen[businessUnit][0] !== "Not Applicable" ? (
@@ -341,7 +302,14 @@ const Cname = () => {
               </select>
             )}
           </div>
-          <div className="md:w-1/3 w-full md:mt-0 mt-6 mr-6">
+          <div
+            className={`md:${
+              Category === "other" ||
+              Types_for_Campaign[businessUnit][0] === "Other"
+                ? "w-1/3"
+                : "w-1/2"
+            } w-full md:mt-0 mt-6 mr-6`}
+          >
             <p className="font-bold text-xl w-full">Select Category</p>
             <div className="w-full pt-2"></div>
             {Types_for_Campaign[businessUnit][0] !== "Not Applicable" &&
@@ -364,7 +332,7 @@ const Cname = () => {
                 value={Category}
                 onChange={(event) => setCategory(event.target.value)}
                 className="w-full bg-gray-400 hover:bg-gray-400 border-gray-400"
-                disabled="true"
+                disabled={true}
               >
                 {Types_for_Campaign[businessUnit].map((val, key) => (
                   <option key={key} value={val}>
@@ -374,27 +342,30 @@ const Cname = () => {
               </select>
             )}
           </div>
-          <div className="relative md:w-1/3 w-full md:mt-0 mt-6">
-            <p className="font-bold text-xl w-full">Enter Campaign Name</p>
-            <div className="w-full pt-2"></div>
-            <div className="w-full input md:mt-0 mt-3">
-              <input
-                type="text"
-                value={campaignname}
-                onChange={(event) => setCampaignname(event.target.value)}
-                className="w-full"
-                placeholder="Enter Content Value..."
-              />
-              {campaignname && (
-                <p
-                  onClick={() => clearInput("campaignname")}
-                  className="absolute right-2 top-3/4 md:transform -translate-y-3/4 transform-translate-y-1/4 text-gray-600 text-2xl cursor-pointer items-center md:pt-2 pt-6"
-                >
-                  &times;
-                </p>
-              )}
+          {(Types_for_Campaign[businessUnit][0] === "Other" ||
+            Category === "other") && (
+            <div className="relative md:w-1/3 w-full md:mt-0 mt-6">
+              <p className="font-bold text-xl w-full">Enter Campaign Name</p>
+              <div className="w-full pt-2"></div>
+              <div className={`w-full input md:mt-0 mt-3 $`}>
+                <input
+                  type="text"
+                  value={campaignname}
+                  onChange={(event) => setCampaignname(event.target.value)}
+                  className="w-full"
+                  placeholder="Enter Content Value..."
+                />
+                {campaignname && (
+                  <p
+                    onClick={() => clearInput("campaignname")}
+                    className="absolute right-2 top-3/4 md:transform -translate-y-3/4 transform-translate-y-1/4 text-gray-600 text-2xl cursor-pointer items-center md:pt-2 pt-6"
+                  >
+                    &times;
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 

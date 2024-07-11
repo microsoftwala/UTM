@@ -13,11 +13,10 @@ const Navbar = ({ setShownav, showNav, count }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log("Hi", count);
   return (
     <motion.div className="grid grid-cols-4 bg-[#3860B2] rounded-sm border mr-2 border-black text-white">
       <div
-        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[12.5px] flex border-r border-gray-900 ${
           count > 1 && "text-gray-600 bg-gray-300"
         } ${
           count === 1 && "border-t-[5px] border-t-red-500 bg-white text-black"
@@ -31,7 +30,7 @@ const Navbar = ({ setShownav, showNav, count }) => {
         )}
       </div>
       <div
-        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[12.5px] flex border-r border-gray-900 ${
           count > 2 && "text-gray-600 bg-gray-300"
         } ${
           count === 2 && "border-t-[5px] border-t-red-500 bg-white text-black"
@@ -45,7 +44,7 @@ const Navbar = ({ setShownav, showNav, count }) => {
         )}
       </div>
       <div
-        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex border-r border-gray-900 ${
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[12.5px] flex border-r border-gray-900 ${
           count > 3 && "text-gray-600 bg-gray-300"
         } ${
           count === 3 && "border-t-[5px] border-t-red-500 bg-white text-black"
@@ -53,7 +52,7 @@ const Navbar = ({ setShownav, showNav, count }) => {
       >
         {windowwidth >= 900
           ? "Business & Category & Parameter"
-          : "Busn & Catg & Parm"}
+          : "Bus & Catg & Parm"}
         {count > 3 && (
           <div className="flex items-center ml-2">
             <TiTick className="text-green-600 text-xl" />
@@ -61,7 +60,7 @@ const Navbar = ({ setShownav, showNav, count }) => {
         )}
       </div>
       <div
-        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[13px] flex ${
+        className={`items-center justify-center font-semibold p-2 md:text-[16px] text-[12.5px] flex ${
           count > 4 && "text-gray-600 bg-gray-300"
         } ${
           count === 4 && "border-t-[5px] border-t-red-500 bg-white text-black"

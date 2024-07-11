@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -7,9 +7,8 @@ import { motion } from "framer-motion";
 import animation from "../component/animation";
 import PreviewButton from "../component/previewbutton";
 import Footer from "../component/footer";
-import Continue from "../component/continue";
 
-const Plateform = ({ onDisable }) => {
+const Plateform = forwardRef(({ onDisable }, ref) => {
   const navigate = useNavigate();
   const {
     businessUnit,
@@ -37,30 +36,29 @@ const Plateform = ({ onDisable }) => {
 
   const handleClick = (campaign) => {
     setSelectedPlateform(campaign);
-    if (campaign === "Display Other") {
+    if (campaign === "Display Other" || campaign === "Others") {
       setCheckfordisplay(true);
       return;
     }
-    if (
-      campaign === "Display Other" ||
-      campaign === "Choose_data"
-    ) {
+    if (campaign === "Display Other" || campaign === "Choose_data") {
       alert("Choose Display Other Parameter First !!!");
       return;
     }
     navigate("/business&category&parameter");
   };
 
-  // const handleNextPage = () => {};
-
   const plateForm1 = ["Google"];
   const plateForm2 = ["Facebook", "Twitter", "Instagram", "LinkedIn"];
   const plateForm3 = ["Google", "Display Other"];
   const plateForm4 = ["Marketo", "Web Power", "NewsLetter"];
   const plateForm5 = ["Youtube"];
-  const plateForm6 = ["QR Code", "Trade Media"];
+  let plateForm6 = ["QR Code", "Trade Media"];
+  if (businessUnit === "Animal Health & Nutrition") {
+    plateForm6.push("Others");
+  }
+  const plateForm7 = ["Google Display Network", "DV360", "Display Other"];
 
-  const { Human_Nutrition, TTH_ISOL } = data;
+  const { Human_Nutrition, TTH_ISOL, Animal_Health_Nutrition } = data;
 
   useEffect(() => {
     const handleResize = () => {
@@ -81,12 +79,13 @@ const Plateform = ({ onDisable }) => {
   return (
     <motion.div
       // className="container1"
-      className="mt-16 flex flex-col h-full"
+      className="mt-6 flex flex-col h-full"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition1}
+      ref={ref}
     >
       <div>
         <p className="title font-bold md:ml-8 ml-4 flex justify-center md:justify-start">
@@ -150,10 +149,22 @@ const Plateform = ({ onDisable }) => {
                 </>
               )}
               {(businessUnit === "Biomedical" ||
-                businessUnit === "Animal Health & Nutrition" ||
                 businessUnit === "Personal Care") && (
                 <>
                   {plateForm1.map((plateform, ind) => (
+                    <button
+                      key={ind}
+                      className={"campaign-button"}
+                      onClick={() => handleClick(plateform)}
+                    >
+                      {plateform}
+                    </button>
+                  ))}
+                </>
+              )}
+              {businessUnit === "Animal Health & Nutrition" && (
+                <>
+                  {plateForm7.map((plateform, ind) => (
                     <button
                       key={ind}
                       className={"campaign-button"}
@@ -244,6 +255,22 @@ const Plateform = ({ onDisable }) => {
                 ))}
               </select>
             )}
+
+          {businessUnit === "Animal Health & Nutrition" &&
+            firstarray === "Animal Health & Nutrition" &&
+            checkfordisplay && (
+              <select
+                id="selectedPlateform"
+                value={selectedPlateform}
+                onChange={handleplateformsUnitChange}
+              >
+                {Animal_Health_Nutrition.map((val, key) => (
+                  <option key={key} value={val}>
+                    {val}
+                  </option>
+                ))}
+              </select>
+            )}
         </div>
       </div>
 
@@ -258,6 +285,6 @@ const Plateform = ({ onDisable }) => {
       </div>
     </motion.div>
   );
-};
+});
 
 export default Plateform;

@@ -47,4 +47,15 @@ const Human_Nutrition = [
   "ingredients_latam",
 ];
 
-export default { Human_Nutrition, TTH_ISOL };
+const Animal_Health_Nutrition = [
+  "Choose_data",
+  "International_Aquafeed",
+  "Poultry_World",
+  "Pig_Progress",
+  "Milling_&_Grain",
+  "International_Poultry_Production",
+  "All_About_Feed",
+  "World’s_Poultry_Science_Journal",
+];
+
+export default { Human_Nutrition, TTH_ISOL,Animal_Health_Nutrition };

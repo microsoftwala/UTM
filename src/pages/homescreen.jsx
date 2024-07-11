@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../css/homescreen.css";
 import { useGlobalState } from "../component/globalState";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +33,17 @@ function Homescreen() {
     setBusinessUnit(event.target.value);
     setCheckfordisplay(false);
   };
+
+  const [windowheight, setWindowheight] = useState(window.innerHeight);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowheight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleGetStarted = () => {
     console.log("Business Unit:", businessUnit);
@@ -87,7 +98,7 @@ function Homescreen() {
       </Popup>
 
       <div className="content w-full mb-auto mt-auto">
-        <h1 className="h1 flex justify-center items-center text-center pt-3">
+        <h1 className={`h1 flex justify-center items-center text-center ${windowheight <= 550 ? "mt-11":"mt-4"}`}>
           UTM Parameters Automation Utility
         </h1>
         <div className="form-group mt-16">
@@ -101,7 +112,7 @@ function Homescreen() {
             <option value="Human Nutrition">Human Nutrition</option>
             <option value="Personal Care">Personal Care</option>
             <option value="Animal Health & Nutrition">
-              Animal Health & Nutrition
+              Animal Nutrition & Health
             </option>
             <option value="TTH ISOL">TTH ISOL</option>
             <option value="Biomedical">Biomedical</option>

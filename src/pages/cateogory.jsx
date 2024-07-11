@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -9,7 +9,7 @@ import Footer from "../component/footer";
 import Continue from "../component/continue";
 import PreviewButton from "../component/previewbutton";
 
-const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
+const Cateogory = forwardRef(({ changeOndisable1, changeOndisable2 }, ref) => {
   const {
     businessUnit,
     specie,
@@ -53,12 +53,13 @@ const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
   return (
     <motion.div
       // className="container1"
-      className="mt-16 flex flex-col"
+      className="mt-8 flex flex-col"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition}
+      ref={ref}
     >
       {/* <Header /> */}
 
@@ -181,16 +182,18 @@ const Cateogory = ({ changeOndisable1, changeOndisable2 }) => {
         )}
       </div>
 
-      <div className="relative flex justify-center items-center h-16 pt-14 mb-10 md:mb-8">
-        {/* <Footer goBack={() => navigate("/business")} /> */}
-        <Footer goBack={() => changeOndisable1()} onDisable={onDisable2} />
-        <Continue handleClick={handleClick} onDisable={onDisable2} />
-        <div className="absolute right-1 md:text-4xl text-3xl">
-          <PreviewButton onDisable={onDisable2} />
+      {!onDisable2 && (
+        <div className="relative flex justify-center items-center h-16 pt-14 mb-10 md:mb-8">
+          {/* <Footer goBack={() => navigate("/business")} /> */}
+          <Footer goBack={() => changeOndisable1()} onDisable={onDisable2} />
+          <Continue handleClick={handleClick} onDisable={onDisable2} />
+          <div className="absolute right-1 md:text-4xl text-3xl">
+            <PreviewButton onDisable={onDisable2} />
+          </div>
         </div>
-      </div>
+      )}
     </motion.div>
   );
-};
+});
 
 export default Cateogory;

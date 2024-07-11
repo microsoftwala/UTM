@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -22,37 +22,46 @@ const Campaign = () => {
     setOndisable,
     setOndisable1,
     setOndisable2,
+    setCheckfordisplay,
   } = useGlobalState();
   setLastroute("/campaign&platform");
-
   const [windowwidth, setWindowwidth] = useState(window.innerWidth);
-  const [showNav, setShownav] = useState(true);
   setOndisable1(false); //for category
   setOndisable2(false); //for parameter
-  const handleClick = () => {
-    // navigate("/plateform");
-    // setOndisable(true);
-  };
-
+  const platformRef = useRef(null);
+  
   const changeOndisable = () => {
     setOndisable(false);
   };
-
+  
   if (businessUnit === "Select a Business Unit") {
     navigate("/");
   }
-
+  
   const handleCampaign = (campaign) => {
+    setCheckfordisplay(false);
     setSelectedCampaign(campaign);
-    if (businessUnit === "Human Nutrition") {
+    if (businessUnit === "Human Nutrition" && campaign === "Display") {
       setFirstarray("Human Nutrition");
-    } else if (businessUnit === "TTH ISOL") {
+    } else if (businessUnit === "TTH ISOL" && campaign === "Display") {
       setFirstarray("TTH ISOL");
+    } else if (
+      businessUnit === "Animal Health & Nutrition" &&
+      (campaign === "Display" || campaign === "Print")
+    ) {
+      setFirstarray("Animal Health & Nutrition");
     }
     setOndisable(true);
   };
 
-  const campaignTypes = campaignTypesData;
+  let campaignTypes1 = campaignTypesData;
+  let campaignTypes;
+
+  if (businessUnit === "Animal Health & Nutrition") {
+    campaignTypes = campaignTypes1.filter((campaign) => campaign !== "Others");
+  } else {
+    campaignTypes = campaignTypes1;
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,6 +72,12 @@ const Campaign = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [windowwidth]);
+
+  useEffect(() => {
+    if (onDisable && platformRef.current) {
+      platformRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [onDisable, setOndisable]);
 
   const { fadeTransition, fadeVariants } = animation;
 
@@ -76,7 +91,7 @@ const Campaign = () => {
       transition={fadeTransition}
     >
       <div className="fixed bg-white z-10">
-        <Header on={true} onDisable={onDisable} count={2}/>
+        <Header on={true} onDisable={onDisable} count={2} />
       </div>
       <div className={`${windowwidth > 780 ? "mt-36" : "mt-[280px]"}`}>
         <p
@@ -140,17 +155,19 @@ const Campaign = () => {
         )}
       </div>
 
-      <div className="relative flex justify-center items-center pt-14 mb-10 md:mb-0">
-        <Footer goBack={() => navigate("/")} onDisable={onDisable} />
-        {/* {selectedCampaign.length > 0 && (
-          <Continue handleClick={handleClick} onDisable={onDisable} />
-        )} */}
-        <div className="absolute right-1 md:text-4xl text-3xl">
-          <PreviewButton onDisable={onDisable} />
+      {!onDisable && (
+        <div className="relative flex justify-center items-center pt-14 mb-10 md:mb-0">
+          <Footer goBack={() => navigate("/")} onDisable={onDisable} />
+          {/* {selectedCampaign.length > 0 && (
+            <Continue handleClick={handleClick} onDisable={onDisable} />
+          )} */}
+          <div className="absolute right-1 md:text-4xl text-3xl">
+            <PreviewButton onDisable={onDisable} />
+          </div>
         </div>
-      </div>
+      )}
 
-      {onDisable && <Plateform onDisable={changeOndisable} />}
+      {onDisable && <Plateform ref={platformRef} onDisable={changeOndisable} />}
     </motion.div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, forwardRef } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -9,7 +9,7 @@ import Footer from "../component/footer";
 import Continue from "../component/continue";
 import PreviewButton from "../component/previewbutton";
 
-const Parameter = ({ changeOndisable2, changeOndisable1 }) => {
+const Parameter = forwardRef(({ changeOndisable2, changeOndisable1 }, ref) => {
   const {
     setLastroute,
     businessUnit,
@@ -51,16 +51,17 @@ const Parameter = ({ changeOndisable2, changeOndisable1 }) => {
   return (
     <motion.div
       // className="container1"
-      className="mt-16 flex flex-col"
+      className="mt-8 flex flex-col"
       initial="initial"
       animate="in"
       exit="out"
       variants={fadeVariants}
       transition={fadeTransition}
+      ref={ref}
     >
       {/* <Header /> */}
 
-      <div className="mt-16 mb-16 ml-10 mr-10 md:mr-0">
+      <div className="mt-8 mb-16 ml-10 mr-10 md:mr-0">
         <div className="mb-14 md:flex justify-between w-full">
           <div className="md:w-1/2 w-full ">
             <p className="font-bold text-2xl">Enter Content Type</p>
@@ -174,6 +175,6 @@ const Parameter = ({ changeOndisable2, changeOndisable1 }) => {
       </div>
     </motion.div>
   );
-};
+});
 
 export default Parameter;

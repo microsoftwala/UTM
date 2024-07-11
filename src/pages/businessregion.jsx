@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../css/campaign.css";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../component/globalState";
@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import Footer from "../component/footer";
 import Continue from "../component/continue";
 import PreviewButton from "../component/previewbutton";
-import ShowNavBar from "../component/showNavbar";
 import Cateogory from "./cateogory";
 import Parameter from "./parameter";
 
@@ -46,7 +45,6 @@ const Businessregion = () => {
     }
   };
 
-  const [showNav, setShownav] = useState(true);
 
   const Region = ["Global", "EMEA", "APAC", "LATAM", "NA", "GC"];
 
@@ -65,9 +63,20 @@ const Businessregion = () => {
     setRegion(Region[0]);
   }, [businessUnit]);
 
+  const platformRef = useRef(null);
+  const platformRef1 = useRef(null);
+  useEffect(() => {
+    if (onDisable1 && platformRef.current) {
+      platformRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+    if (onDisable2 && platformRef1.current) {
+      platformRef1.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [onDisable1, onDisable2]);
+
   return (
     <motion.div
-      className="container1 flex flex-col"
+      className="container1 flex flex-col h-screen"
       initial="initial"
       animate="in"
       exit="out"
@@ -75,7 +84,7 @@ const Businessregion = () => {
       transition={fadeTransition}
     >
       <div className="fixed bg-white z-10">
-        <Header on={true} count = {3}/>
+        <Header on={true} count={3} />
       </div>
 
       <div className="mt-[278px] md:mt-44 mb-auto mx-10">
@@ -162,30 +171,34 @@ const Businessregion = () => {
           )}
       </div>
 
-      <div className="relative flex justify-center items-center h-16 pt-14 mb-10 md:mb-0">
-        <Footer
-          goBack={() => navigate("/campaign&platform")}
-          onDisable={onDisable1 || onDisable2}
-        />
-        <Continue
-          handleClick={handleClick}
-          onDisable={onDisable1 || onDisable2}
-        />
-        <div className="absolute right-1 md:text-4xl text-3xl">
-          <PreviewButton onDisable={onDisable1 || onDisable2} />
+      {!(onDisable1 || onDisable2) && (
+        <div className="relative flex justify-center items-center h-16 pt-14 mb-10 md:mb-0">
+          <Footer
+            goBack={() => navigate("/campaign&platform")}
+            onDisable={onDisable1 || onDisable2}
+          />
+          <Continue
+            handleClick={handleClick}
+            onDisable={onDisable1 || onDisable2}
+          />
+          <div className="absolute right-1 md:text-4xl text-3xl">
+            <PreviewButton onDisable={onDisable1 || onDisable2} />
+          </div>
         </div>
-      </div>
+      )}
 
       {onDisable1 &&
         businessUnit !== "Human Nutrition" &&
         businessUnit.length > 0 && (
           <Cateogory
+            ref={platformRef}
             changeOndisable1={() => setOndisable1(false)}
             changeOndisable2={() => setOndisable2(true)}
           />
         )}
       {onDisable2 && (
         <Parameter
+          ref={platformRef1}
           changeOndisable2={() => setOndisable2(false)}
           changeOndisable1={() => setOndisable1(false)}
         />

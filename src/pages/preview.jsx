@@ -45,13 +45,20 @@ const Preview = () => {
           className="image p-4"
         />
       </div>
-      <div className="flex justify-center font-semibold mt-4 md:text-3xl text-2xl text-gray-500">Preview</div>
+      <div className="flex justify-center font-semibold mt-4 md:text-3xl text-2xl text-gray-500">
+        Preview
+      </div>
       <div className="mt-4 ml-10 mr-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
         <p className="text-lg font-bold mb-4">Campaign Details</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="flex items-center overflow-hidden">
             <p className="font-semibold">Business Unit:</p>
-            <p className="ml-2 truncate">{businessUnit}</p>
+
+            {businessUnit === "Animal Health & Nutrition" ? (
+              <p className="ml-2 truncate">Animal Nutrition & Health</p>
+            ) : (
+              <p className="ml-2 truncate">{businessUnit}</p>
+            )}
           </div>
           <div className="flex items-center overflow-hidden">
             <p className="font-semibold">Campaign:</p>
