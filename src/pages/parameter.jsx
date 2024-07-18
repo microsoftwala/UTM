@@ -131,39 +131,42 @@ const Parameter = forwardRef(({ changeOndisable2, changeOndisable1 }, ref) => {
           </div>
         </div>
 
-        <div className="md:flex justify-between w-full">
-          <div className="md:w-1/2 w-full">
-            <p className="font-bold text-2xl">Enter Ad Description</p>
-            <p>
-              The selection here will set the value in
-              <br />
-              "utm_vehicle" parameters
-            </p>
-          </div>
-          <div className="md:w-1/2 w-full pt-2 input">
-            <div
-              className={
-                content === "Other" ? "w-full relative" : "parawidth relative"
-              }
-            >
-              <input
-                type="text"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                className="w-full"
-                placeholder="Enter Vehicle Value..."
-              />
-              {description && (
-                <p
-                  onClick={() => setDescription("")}
-                  className="absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl cursor-pointer md:pt-0 pt-3"
-                >
-                  &times;
-                </p>
-              )}
+        {(businessUnit === "Human Nutrition" ||
+          businessUnit === "TTH ISOL") && (
+          <div className="md:flex justify-between w-full">
+            <div className="md:w-1/2 w-full">
+              <p className="font-bold text-2xl">Enter Ad Description</p>
+              <p>
+                The selection here will set the value in
+                <br />
+                "utm_vehicle" parameters
+              </p>
+            </div>
+            <div className="md:w-1/2 w-full pt-2 input">
+              <div
+                className={
+                  content === "Other" ? "w-full relative" : "parawidth relative"
+                }
+              >
+                <input
+                  type="text"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                  className="w-full"
+                  placeholder="Enter Vehicle Value..."
+                />
+                {description && (
+                  <p
+                    onClick={() => setDescription("")}
+                    className="absolute right-2 top-1/3 transform -translate-y-1/2 text-gray-600 text-2xl cursor-pointer md:pt-0 pt-3"
+                  >
+                    &times;
+                  </p>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="relative flex justify-center items-center h-16 pt-14 mb-10">

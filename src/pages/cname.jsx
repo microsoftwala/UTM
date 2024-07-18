@@ -120,7 +120,7 @@ const Cname = () => {
         selectedCampaign +
         "&utm_campaign=" +
         campaignname1 +
-        "_" +
+        (Category.length > 0 ? "_":"") +
         Category +
         "&utm_term=" +
         businessline +
@@ -144,13 +144,11 @@ const Cname = () => {
         selectedCampaign +
         "&utm_campaign=" +
         campaignname1 +
-        "_" +
+        (Category.length > 0 ? "_":"") +
         Category +
         "&utm_term=" +
         (cateogory !== "Other" ? cateogory : "") +
         cateogory1_1 +
-        "_" +
-        businessline +
         "_" +
         region +
         "&utm_content=" +

@@ -114,7 +114,7 @@ const Campaign = () => {
           The selection below will set the value in "utm_medium" parameters
         </p>
       </div>
-      <div className="all_types mt-auto mb-auto">
+       <div className="all_types mt-auto mb-auto">
         {windowwidth >= 840 && (
           <>
             <div className="buttons-grid">
